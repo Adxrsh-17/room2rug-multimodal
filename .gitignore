@@ -1,0 +1,25 @@
+__pycache__/
+*.py[cod]
+*.pyc
+.ipynb_checkpoints/
+.venv/
+venv/
+.env
+.env.*
+.DS_Store
+*.log
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/.ropeproject/
+
+# Large model/index files — too big for GitHub
+index/*.faiss
+index/*.pkl
+
+# Scratch/debug scripts created during development
+gen_app.py
+write_app.py
+test_proxy.py
+check_write.txt
+archive/

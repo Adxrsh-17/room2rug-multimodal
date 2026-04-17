@@ -1,0 +1,11 @@
+flowchart LR
+    A[Text Query] --> B[Query Parser]
+    B --> C[Metadata Filter]
+    C --> F[Fusion Score]
+    D[Room Image] --> E[CLIP Encoder]
+    E --> G[FAISS Search]
+    H[Optional Text] --> I[CLIP Text Encoder]
+    I --> J[Cosine Similarity]
+    G --> F
+    J --> F
+    F --> K[Ranked Results]

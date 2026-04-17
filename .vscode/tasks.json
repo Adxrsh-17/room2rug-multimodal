@@ -1,0 +1,13 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Run search pipeline",
+      "type": "shell",
+      "command": "python",
+      "args": ["-m", "src.search"],
+      "group": "build",
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,242 @@
+[
+  {
+    "test": "parse_query('8x10 beige traditional rug')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 8.0, 'length': 10.0}, 'shape': 'rectangle', 'color': ['beige'], 'style': ['traditional'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('runner 2x10 blue rug')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 2.0, 'length': 10.0}, 'shape': 'runner', 'color': ['blue'], 'style': [], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('round 6 ft modern rug')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 6.0, 'length': 6.0}, 'shape': 'round', 'color': [], 'style': ['modern'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('large neutral rug')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'rectangle', 'color': ['neutral'], 'style': [], 'size_class': 'large'}"
+  },
+  {
+    "test": "parse_query('8 by 10 grey persian')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 8.0, 'length': 10.0}, 'shape': 'rectangle', 'color': ['grey'], 'style': ['persian'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('7.5x9.5 ivory transitional')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 7.5, 'length': 9.5}, 'shape': 'rectangle', 'color': ['ivory'], 'style': ['transitional'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('8x10')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 8.0, 'length': 10.0}, 'shape': 'rectangle', 'color': [], 'style': [], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('10x8 rug')",
+    "status": "PASS",
+    "details": "{'dimensions': {'width': 8.0, 'length': 10.0}, 'shape': 'rectangle', 'color': [], 'style': [], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('gray bohemian rug')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'rectangle', 'color': ['grey'], 'style': ['bohemian'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('boho multicolor runner')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'runner', 'color': ['multi'], 'style': ['bohemian'], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('small accent rug')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'rectangle', 'color': [], 'style': [], 'size_class': 'small'}"
+  },
+  {
+    "test": "parse_query('oversized area rug')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'rectangle', 'color': [], 'style': [], 'size_class': 'xlarge'}"
+  },
+  {
+    "test": "parse_query('nice rug')",
+    "status": "PASS",
+    "details": "{'dimensions': None, 'shape': 'rectangle', 'color': [], 'style': [], 'size_class': None}"
+  },
+  {
+    "test": "parse_query('')",
+    "status": "PASS",
+    "details": "empty query handled"
+  },
+  {
+    "test": "filter: size 8x10",
+    "status": "PASS",
+    "details": "68 products returned"
+  },
+  {
+    "test": "filter: no filters",
+    "status": "PASS",
+    "details": "all products returned"
+  },
+  {
+    "test": "filter: soft color",
+    "status": "PASS",
+    "details": "68 products returned (soft filter)"
+  },
+  {
+    "test": "filter: runner shape",
+    "status": "PASS",
+    "details": "67 products"
+  },
+  {
+    "test": "search_structured('8x10 beige traditional rug')",
+    "status": "PASS",
+    "details": "10 results in 0.01s | top: 'Palace 10302 Brown/ Beige Oriental Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('runner 2x10 blue rug')",
+    "status": "PASS",
+    "details": "10 results in 0.0s | top: 'Palace 10311 Blue/ Green Oriental Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('round 6 ft modern rug')",
+    "status": "PASS",
+    "details": "10 results in 0.02s | top: 'Palace 10302 Brown/ Beige Oriental Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('large neutral rug')",
+    "status": "PASS",
+    "details": "10 results in 0.0s | top: 'Palace 10302 Brown/ Beige Oriental Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('small bohemian accent rug')",
+    "status": "PASS",
+    "details": "10 results in 0.01s | top: 'Palace 10301 Beige/ Grey Oriental Rug' (0.29)"
+  },
+  {
+    "test": "search_structured('9x12 navy geometric')",
+    "status": "PASS",
+    "details": "10 results in 0.01s | top: 'Marina 5927B Ivory/ Navy Trefoil Outdoor Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('nice rug')",
+    "status": "PASS",
+    "details": "10 results in 0.01s | top: 'Palace 10302 Brown/ Beige Oriental Rug' (0.25)"
+  },
+  {
+    "test": "search_structured('red')",
+    "status": "PASS",
+    "details": "10 results in 0.0s | top: 'Palace 10306 Red/ Grey Oriental Rug' (0.50)"
+  },
+  {
+    "test": "search_structured('')",
+    "status": "PASS",
+    "details": "empty query \u2192 []"
+  },
+  {
+    "test": "embed_image: valid file",
+    "status": "PASS",
+    "details": "shape=(512,), norm=1.0000"
+  },
+  {
+    "test": "embed_image: broken URL",
+    "status": "PASS",
+    "details": "returned None gracefully"
+  },
+  {
+    "test": "embed_text: valid text",
+    "status": "PASS",
+    "details": "shape=(512,)"
+  },
+  {
+    "test": "embed_text: empty string",
+    "status": "PASS",
+    "details": "returned None"
+  },
+  {
+    "test": "embed: shared vector space",
+    "status": "PASS",
+    "details": "cross-modal cosine sim = 0.228"
+  },
+  {
+    "test": "load_index",
+    "status": "PASS",
+    "details": "68 products indexed"
+  },
+  {
+    "test": "search_index: image query",
+    "status": "PASS",
+    "details": "top score=0.266, positions=[43, 45, 44]"
+  },
+  {
+    "test": "search_index: text query",
+    "status": "PASS",
+    "details": "top score=0.609"
+  },
+  {
+    "test": "fusion: mode=A img=0.8 txt=None",
+    "status": "PASS",
+    "details": "score=0.800"
+  },
+  {
+    "test": "fusion: mode=B img=0.8 txt=0.6",
+    "status": "PASS",
+    "details": "score=0.720"
+  },
+  {
+    "test": "fusion: mode=C img=None txt=0.7",
+    "status": "PASS",
+    "details": "score=0.700"
+  },
+  {
+    "test": "fusion: mode=B img=1.0 txt=1.0",
+    "status": "PASS",
+    "details": "score=1.000"
+  },
+  {
+    "test": "fusion: mode=B img=0.0 txt=0.0",
+    "status": "PASS",
+    "details": "score=0.000"
+  },
+  {
+    "test": "fusion: mode=B img=0.5 txt=0.5",
+    "status": "PASS",
+    "details": "score=0.500"
+  },
+  {
+    "test": "fusion: invalid mode",
+    "status": "PASS",
+    "details": "raised ValueError correctly"
+  },
+  {
+    "test": "search_multimodal: Mode A: image only",
+    "status": "PASS",
+    "details": "10 results in 7.32s | top: 'Myers Park Myp17 Grey/ Charcoal Animal Geometric Rug' (0.27)"
+  },
+  {
+    "test": "search_multimodal: Mode B: image + vague text",
+    "status": "PASS",
+    "details": "10 results in 8.04s | top: 'Palace 10309 Grey/ Multi Oriental Rug' (0.30)"
+  },
+  {
+    "test": "search_multimodal: Mode B: image + specific style",
+    "status": "PASS",
+    "details": "10 results in 8.07s | top: 'Palace 10302 Brown/ Beige Oriental Rug' (0.30)"
+  },
+  {
+    "test": "search_multimodal: Mode B: image + size intent",
+    "status": "PASS",
+    "details": "10 results in 8.07s | top: 'Palace 10309 Grey/ Multi Oriental Rug' (0.38)"
+  },
+  {
+    "test": "search_multimodal: Mode B: image + structured text",
+    "status": "PASS",
+    "details": "10 results in 8.66s | top: 'Palace 10309 Grey/ Multi Oriental Rug' (0.32)"
+  },
+  {
+    "test": "search_multimodal: Mode B: image + color+style",
+    "status": "PASS",
+    "details": "10 results in 7.33s | top: 'Palace 10309 Grey/ Multi Oriental Rug' (0.30)"
+  }
+]

@@ -1,0 +1,13 @@
+pandas
+numpy
+beautifulsoup4
+lxml
+sentence-transformers
+transformers
+torch
+faiss-cpu
+pillow
+requests
+scikit-learn
+jupyter
+ipykernel

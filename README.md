@@ -79,6 +79,8 @@ pip install -r requirements.txt
 
 The Shopify CSV is already at `data/products.csv`. Place additional room photos in `images/`.
 
+> **⚠️ NOTE ON PLACEHOLDER IMAGES:** The default `data/products.csv` contains Shopify image links that have been deleted from the origin server (404 Not Found). Because of this, the frontend UI will default to a placeholder (🧶). **For proper image loading, you must modify the `data/products.csv` file with your own active image links!**
+
 **Using Your Own Product Images:**
 If you want to use your own rug images in the UI, you can open `data/products.csv` and update the `Image Src` column with active, publicly accessible URLs to your custom images (e.g., from AWS S3, Imgur, or your own CDN).
 Then, re-run the preprocessing script to rebuild the catalog `json`:

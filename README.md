@@ -13,7 +13,7 @@ A two-part AI-powered search engine for rug e-commerce, combining structured tex
 [Optional Text]► CLIP Text Enc ──► Cosine Sim ──────►
 ```
 
-See [`architecture.png`](architecture.png) and the [full write-up](writeup.md) for details.
+See [`docs/architecture.png`](docs/architecture.png) and the [full technical spec](docs/TECHNICAL_SPEC.md) for details.
 
 ---
 
@@ -23,10 +23,16 @@ See [`architecture.png`](architecture.png) and the [full write-up](writeup.md) f
 MultiModalSearchAssignment/
 ├── data/
 │   └── products.csv          # Shopify export (68 unique products)
+├── docs/
+│   ├── TECHNICAL_SPEC.md     # Technical write-up
+│   ├── architecture.mmd      # Source for architecture diagram
+│   └── architecture.png      # System diagram
 ├── images/
 │   └── room1.jpg, room2.JPG, ...   # Room photos for multimodal demo
 ├── index/
 │   └── image.index.npy, text.index.npy, ...  # Pre-built FAISS indexes
+├── notebooks/
+│   └── demo.ipynb            # Google Colab-friendly demo
 ├── src/
 │   ├── preprocess.py         # CSV → clean product dict (one per handle)
 │   ├── query_parser.py       # Regex + rule-based query parser
@@ -39,12 +45,10 @@ MultiModalSearchAssignment/
 │   ├── search_part1.py       # Part 1: structured text search pipeline
 │   ├── search_part2.py       # Part 2: multimodal image+text pipeline
 │   └── search.py             # Unified entry point
-├── notebooks/
-│   └── demo.ipynb            # Google Colab-friendly demo
-├── test_pipeline.py          # Full end-to-end test suite (46 tests)
-├── test_results.json         # Latest test run results (all PASS)
-├── architecture.png          # System diagram
-├── writeup.md                # Technical write-up
+├── tests/
+│   ├── test_pipeline.py      # Full end-to-end test suite (46 tests)
+│   └── test_results.json     # Latest test run results (all PASS)
+├── app.py                    # Streamlit frontend app
 ├── requirements.txt
 └── README.md
 ```
@@ -143,7 +147,7 @@ python -m src.search_part2 images/room1.jpeg --text "modern neutral" --top-k 5 -
 ## 🧪 Running Tests
 
 ```bash
-python test_pipeline.py
+python tests/test_pipeline.py
 ```
 
 All 46 tests pass covering: query parsing, catalog filtering, CLIP embeddings, FAISS indexing, fusion scoring, and end-to-end search (both parts).
@@ -188,6 +192,6 @@ Image gets higher weight (0.6) because it encodes color palette, room style, and
 
 ## 📝 See Also
 
-- [`writeup.md`](writeup.md) — Full technical write-up
+- [`docs/TECHNICAL_SPEC.md`](docs/TECHNICAL_SPEC.md) — Full technical write-up
 - [`notebooks/demo.ipynb`](notebooks/demo.ipynb) — Interactive Colab demo
-- [`test_results.json`](test_results.json) — Latest test run (all 46 PASS)
+- [`tests/test_results.json`](tests/test_results.json) — Latest test run (all 46 PASS)

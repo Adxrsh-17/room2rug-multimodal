@@ -188,6 +188,7 @@ Image gets higher weight (0.6) because it encodes color palette, room style, and
 | `scikit-learn` | cosine similarity utilities |
 | `pillow` + `requests` | Image loading (local + URL) |
 
+
 ---
 
 ## 📝 See Also
@@ -195,3 +196,19 @@ Image gets higher weight (0.6) because it encodes color palette, room style, and
 - [`docs/TECHNICAL_SPEC.md`](docs/TECHNICAL_SPEC.md) — Full technical write-up
 - [`notebooks/demo.ipynb`](notebooks/demo.ipynb) — Interactive Colab demo
 - [`tests/test_results.json`](tests/test_results.json) — Latest test run (all 46 PASS)
+
+## Outputs
+<img width="1919" height="872" alt="image" src="https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353" />
+<img width="1860" height="854" alt="image" src="https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a" />
+
+<img width="1918" height="874" alt="image" src="https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198" />
+<img width="1559" height="865" alt="image" src="https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282" />
+
+<img width="1565" height="740" alt="image" src="https://github.com/user-attachments/assets/c7486b1f-a14e-425f-8112-4179dea1b9c7" />
+<img width="1916" height="877" alt="image" src="https://github.com/user-attachments/assets/b7f06d36-1961-4ee4-add1-19c0a5112486" />
+
+
+
+
+
+

@@ -79,6 +79,14 @@ pip install -r requirements.txt
 
 The Shopify CSV is already at `data/products.csv`. Place additional room photos in `images/`.
 
+**Using Your Own Product Images:**
+If you want to use your own rug images in the UI, you can open `data/products.csv` and update the `Image Src` column with active, publicly accessible URLs to your custom images (e.g., from AWS S3, Imgur, or your own CDN).
+Then, re-run the preprocessing script to rebuild the catalog `json`:
+
+```bash
+python src/preprocess.py data/products.csv --output data/products.json
+```
+
 ---
 
 ## 🚀 Usage

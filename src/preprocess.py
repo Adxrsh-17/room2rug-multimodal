@@ -88,6 +88,8 @@ def build_catalog(csv_path: str | Path) -> list[dict[str, Any]]:
         body = strip_html(body_html)
         tags = _first_non_empty(primary_row.get("Tags"))
         image_url = _first_non_empty(primary_row.get("Image Src")) or None
+        if image_url and image_url.startswith("//"):
+            image_url = f"https:{image_url}"
         sizes = _collect_sizes(group)
         size = sizes[0] if sizes else _first_non_empty(primary_row.get("Option1 Value"), primary_row.get("Variant Title"))
         price = _extract_price(group)

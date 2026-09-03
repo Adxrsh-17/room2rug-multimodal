@@ -1,28 +1,79 @@
-# 🧶 Multimodal Rug Search & Recommendation System
+# 🧶 room2rug-multimodal
 
-A two-part AI-powered search engine for rug e-commerce, combining structured text queries, semantic ranking (SentenceTransformers), and visual similarity (CLIP + FAISS).
+> **AI-Powered Multimodal Rug Search & Recommendation Engine**  
+> Seamlessly combining room interior photography, natural language intent, and product metadata using CLIP, SentenceTransformers, and FAISS vector search.
 
----
-
-## 🏗️ Architecture
-
-```
-[Text Query] ──► Query Parser ──► Metadata Filter ──►
-                                                       ├──► Fusion Score ──► Ranked Results
-[Room Image] ──► CLIP Encoder ──► FAISS Search ─────►
-[Optional Text]► CLIP Text Enc ──► Cosine Sim ──────►
-```
-
-See [`docs/architecture.png`](docs/architecture.png) and the [full technical spec](docs/TECHNICAL_SPEC.md) for details.
+[![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+[![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B.svg)](http://localhost:8501)
+[![Test Suite](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/test_pipeline.py)
 
 ---
 
-## 📁 Project Structure
+## 📌 Problem & Overview
+
+E-commerce home decor shopping is inherently visual and spatial. Traditional search engines fail when users want a rug that *"matches my warm living room"* or need specific dimensions without knowing exact catalog keywords. 
+
+`room2rug-multimodal` solves this with a two-part search architecture:
+1. **Part 1 — Structured & Semantic Text Search:** Extracts dimensions, shapes, colors, and styles via rule-based regex and combines metadata scoring with dense semantic text ranking.
+2. **Part 2 — Multimodal Vision-Language Search:** Encodes room photos and catalog imagery using **CLIP (ViT-B/32)**, performs fast similarity search via **FAISS**, and fuses visual context with query intent into an explainable recommendation.
+
+---
+
+## ✨ Key Features
+
+- **🔍 Dual-Mode Search Architecture:**
+  - **Structured Text:** Regex parsing for dimensions (`8x10`, `Runner 2x10`), color palettes, styles, and size classes.
+  - **Multimodal Visuals:** Image-to-image and image+text visual search using normalized CLIP feature vectors.
+- **⚖️ Dynamic Late Fusion:**
+  - **Mode A (Image Only):** Computes direct visual similarity between the room and catalog items ($1.0 \times \text{img\_sim}$).
+  - **Mode B (Multimodal):** Fuses visual harmony with textual intent ($0.6 \times \text{img\_sim} + 0.4 \times \text{txt\_sim}$).
+  - **Mode C (Text Only):** Falls back to dense semantic text embedding ($1.0 \times \text{txt\_sim}$).
+- **⚡ High-Performance Vector Indexing:** Pre-computed FAISS inner-product index with automatic NumPy fallback for instant query latency.
+- **💬 Explainable AI Recommendations:** Generates automated one-sentence explanations highlighting color, pattern, and aesthetic compatibility.
+- **🌐 Interactive Streamlit Dashboard:** Modern dark-mode UI with live image rendering, metric breakdowns, and interactive catalog filters.
+- **📸 100% Verified Product Photography:** Semantically mapped to active, high-resolution rug assets from the **Amazon Berkeley Objects (ABO)** dataset.
+
+---
+
+## 🏗️ Architecture & Pipeline
+
+```
+                              ┌─────────────────────────────┐
+                              │    User Query (Text/Img)    │
+                              └──────────────┬──────────────┘
+                                             │
+                     ┌───────────────────────┴───────────────────────┐
+                     ▼                                               ▼
+         [ Part 1: Text Search ]                         [ Part 2: Multimodal ]
+  ┌─────────────────────────────────────┐         ┌─────────────────────────────────────┐
+  │  1. Query Parser (Regex/Rules)      │         │  1. Room Context Analyzer           │
+  │     └─ Dimensions, Colors, Styles   │         │     └─ Style, Palette & Room Type   │
+  │  2. Metadata Soft Filter            │         │  2. CLIP ViT-B/32 Embeddings        │
+  │     └─ Size, Color, Style scoring   │         │     └─ Normalized 512-dim Vectors   │
+  │  3. SentenceTransformer Semantic    │         │  3. FAISS / NumPy Vector Index      │
+  │     └─ all-MiniLM-L6-v2 Cosine Sim  │         │     └─ Top-K Candidate Retrieval    │
+  └──────────────────┬──────────────────┘         └──────────────────┬──────────────────┘
+                     │                                               │
+                     ▼                                               ▼
+         [ Final Score: 0.5M + 0.5S ]                    [ Weighted Multimodal Fusion ]
+                     │                                               │
+                     └───────────────────────┬───────────────────────┘
+                                             │
+                                             ▼
+                              ┌─────────────────────────────┐
+                              │ Ranked Results + Explanation│
+                              └─────────────────────────────┘
+```
+
+---
+
+## 📁 Repository Structure
 
 ```
 room2rug-multimodal/
 ├── data/
-│   ├── products.csv          # Catalog CSV with verified S3 image URLs
+│   ├── products.csv          # Catalog CSV with verified Amazon S3 image URLs
 │   └── products.json         # Preprocessed clean product records
 ├── docs/
 │   ├── TECHNICAL_SPEC.md     # Technical write-up & architecture spec
@@ -31,191 +82,172 @@ room2rug-multimodal/
 ├── images/
 │   └── room1.jpeg, room2.JPG, ...   # Sample room query photos
 ├── index/
-│   ├── image.index.npy, text.index.npy, ...  # Pre-built FAISS/NumPy vector indexes
-│   ├── image_ids.npy, text_ids.npy           # Product handle ID mappings
+│   ├── image.index.npy, text.index.npy  # Pre-built FAISS/NumPy vector indexes
+│   ├── image_ids.npy, text_ids.npy       # Product handle ID mappings
 │   └── image_metadata.json, text_metadata.json
 ├── notebooks/
 │   └── demo.ipynb            # Interactive demo notebook
 ├── scripts/
-│   ├── build_index.py        # CLI script to rebuild catalog & vector indexes
 │   └── map_abo_rug_images.py # Semantic mapper for Amazon Berkeley Objects images
 ├── src/
-│   ├── preprocess.py         # CSV → clean product dicts
-│   ├── query_parser.py       # Regex + rule-based query parser
+│   ├── preprocess.py         # CSV ingestion & catalog normalization
+│   ├── query_parser.py       # Regex & rule-based query parser
 │   ├── filter_catalog.py     # Soft metadata filters (size, color, style)
 │   ├── ranker.py             # SentenceTransformer semantic ranker
 │   ├── embedder.py           # CLIP ViT-B/32 image + text embeddings
-│   ├── indexer.py            # FAISS index build, save, load, search
+│   ├── indexer.py            # FAISS index build, save, load, and search
 │   ├── fusion.py             # Weighted score combiner (Modes A/B/C)
-│   ├── explainer.py          # One-sentence match explanation generator
+│   ├── explainer.py          # Match explanation generator
 │   ├── search_part1.py       # Part 1: structured text search pipeline
 │   ├── search_part2.py       # Part 2: multimodal image+text pipeline
-│   └── search.py             # Unified entry point
+│   └── search.py             # Unified search entry point
 ├── tests/
-│   ├── test_pipeline.py      # End-to-end test suite
+│   ├── test_pipeline.py      # End-to-end unit & integration test suite
 │   └── test_results.json     # Test execution logs
 ├── app.py                    # Streamlit web application
-├── requirements.txt
-├── LICENSE
-└── README.md
+├── requirements.txt          # Dependencies
+├── LICENSE                   # MIT License
+└── README.md                 # Project documentation
 ```
 
 ---
 
-## ⚙️ Setup
+## 🛠️ Technology Stack
 
-### 1. Create a virtual environment
+| Component | Library / Framework | Description |
+|---|---|---|
+| **Vision-Language Model** | `transformers`, `torch` | `openai/clip-vit-base-patch32` for 512-dim visual embeddings |
+| **Semantic Text Model** | `sentence-transformers` | `all-MiniLM-L6-v2` for dense text representations |
+| **Vector Indexing** | `faiss-cpu` / `numpy` | Approximate nearest neighbor & inner-product search |
+| **Frontend UI** | `streamlit` | Reactive web interface with custom CSS styling |
+| **Data Processing** | `pandas`, `beautifulsoup4` | Catalog parsing, cleaning, and HTML normalization |
+| **Image Handling** | `pillow`, `requests` | Local and remote image loading & preprocessing |
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone & Set Up Environment
 
 ```bash
+git clone https://github.com/Adxrsh-17/room2rug-multimodal.git
+cd room2rug-multimodal
+
+# Create virtual environment
 python -m venv .venv
-# Windows:
+
+# Activate on Windows:
 .venv\Scripts\activate
-# Mac/Linux:
+# Activate on macOS/Linux:
 source .venv/bin/activate
 ```
 
-### 2. Install dependencies
+### 2. Install Dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-> **Windows Note:** If `faiss-cpu` fails to install, use a Conda environment:
-> ```bash
-> conda install -c conda-forge faiss-cpu
-> ```
-> The system automatically falls back to a NumPy-based index if FAISS is unavailable.
-
-### 3. Data
-
-The product catalog is stored at `data/products.csv` with live, high-resolution rug images powered by the **Amazon Berkeley Objects (ABO)** dataset hosted on public Amazon S3 (`https://amazon-berkeley-objects.s3.amazonaws.com/images/small/...`). Place room query photos in `images/`.
-
-> **✨ 100% Real Image Retrieval:** All 68 products feature live S3-hosted images with full pixel-level CLIP image embeddings (68 real images, 0 fallbacks). Both the Streamlit UI and multimodal search pipeline render real product photography.
-
-**Using Your Own Product Images:**
-If you want to use your own rug images in the UI, you can open `data/products.csv` and update the `Image Src` column with active, publicly accessible URLs to your custom images (e.g., from AWS S3, Imgur, or your own CDN).
-Then, re-run the preprocessing script to rebuild the catalog `json`:
-
-```bash
-python src/preprocess.py data/products.csv --output data/products.json
-```
+> **Note on FAISS:** If installing `faiss-cpu` on Windows fails, the system automatically uses a vectorized NumPy fallback (`NumpyInnerProductIndex`) without any code changes.
 
 ---
 
-## 🚀 Usage
+## 💻 Running the Application
 
-### Part 1 — Structured Text Search
-
-```python
-from src.search_part1 import search_part1
-
-results = search_part1("8x10 beige traditional rug", top_k=5)
-for r in results:
-    print(r["rank"], r["title"], r["final_score"])
-```
-
-Supported query patterns:
-- Dimensions: `8x10`, `5 by 8`, `7.5x9.5`
-- Colors: beige, blue, grey, ivory, red, navy, brown, cream, black, white, ...
-- Styles: traditional, modern, persian, bohemian, geometric, transitional, ...
-- Size classes: small, medium, large, xlarge, runner
-- Shapes: round, square, runner
-
-### Part 2 — Multimodal Image + Text Search
-
-```python
-from src.search_part2 import search_multimodal
-
-# Image only (Mode A)
-results = search_multimodal("images/room1.jpeg", top_k=5)
-
-# Image + text (Mode B) — recommended
-results = search_multimodal("images/room2.JPG", text_query="warm traditional 8x10", top_k=5)
-
-# Text only (Mode C)
-results = search_multimodal(None, text_query="navy geometric modern rug", top_k=5)
-
-for r in results:
-    print(r["rank"], r["title"], f"score={r['fusion_score']}")
-```
-
-### Command-line interface
+### Launch the Streamlit Web App
 
 ```bash
-# Part 1
-python -m src.search_part1 "8x10 beige traditional rug" --top-k 5
+streamlit run app.py
+```
+Open **`http://localhost:8501`** in your browser.
 
-# Part 2
+### Command-Line Interface (CLI)
+
+#### Structured Text Search (Part 1):
+```bash
+python -m src.search_part1 "8x10 beige traditional rug" --top-k 5
+```
+
+#### Multimodal Image + Text Search (Part 2):
+```bash
 python -m src.search_part2 images/room1.jpeg --text "modern neutral" --top-k 5 --explain
 ```
 
 ---
 
-## 🧪 Running Tests
+## 📖 Python Usage Examples
+
+### Part 1: Structured Text Query
+```python
+from src.search_part1 import search_part1
+
+results = search_part1("8x10 beige traditional rug", top_k=5)
+for r in results:
+    print(f"#{r['rank']} {r['title']} - Score: {r['final_score']:.3f}")
+```
+
+### Part 2: Multimodal Room Image Search
+```python
+from src.search_part2 import search_multimodal
+
+# Multimodal Mode B: Room photo + textual preference
+results = search_multimodal(
+    room_image="images/room1.jpeg",
+    text_query="warm traditional rug",
+    top_k=5,
+    include_explanations=True
+)
+
+for r in results:
+    print(f"#{r['rank']} {r['title']} (Fusion: {r['fusion_score']:.3f})")
+    print(f"   💬 {r['explanation']}")
+```
+
+---
+
+## 📊 Catalog & Indexing Pipeline
+
+1. **Preprocessing (`src/preprocess.py`):**
+   Groups Shopify/Amazon variants by handle, extracts dimensions and tags, and builds `data/products.json`.
+2. **Semantic Asset Mapping (`scripts/map_abo_rug_images.py`):**
+   Filters Amazon Berkeley Objects for genuine `RUG` items and uses CLIP text embeddings to semantically assign high-resolution photography to catalog rows.
+3. **Vector Index Generation (`src/indexer.py`):**
+   Computes L2-normalized 512-dimensional embeddings for images and text blobs and saves `.index.npy` arrays and metadata in `index/`.
+
+---
+
+## 🧪 Testing
+
+Run the comprehensive test suite covering query parsing, metadata filtering, CLIP embeddings, indexing, and end-to-end search:
 
 ```bash
 python tests/test_pipeline.py
 ```
 
-All 46 tests pass covering: query parsing, catalog filtering, CLIP embeddings, FAISS indexing, fusion scoring, and end-to-end search (both parts).
+All 46 unit and integration tests validate the entire pipeline with complete reporting.
 
 ---
 
-## 🔬 How It Works
+## 🖼️ Screenshots & Outputs
 
-### Part 1 — Scoring Formula
+### 1. Structured Text Search (`8x10 beige traditional rug`)
+![Structured Text Search](https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353)
+![Structured Text Grid](https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a)
 
-```
-final_score = 0.5 × metadata_score + 0.5 × semantic_cosine_similarity
-```
-
-- **metadata_score**: weighted sum of size match (40%) + color match (30%) + style match (30%)
-- **semantic_cosine_similarity**: cosine similarity between `all-MiniLM-L6-v2` embeddings of query and product text
-
-### Part 2 — Fusion Modes
-
-| Mode | Triggered when | Formula |
-|------|---------------|---------|
-| A | Image only | `1.0 × image_sim` |
-| B | Image + text | `0.6 × image_sim + 0.4 × text_sim` |
-| C | Text only | `1.0 × text_sim` |
-
-Image gets higher weight (0.6) because it encodes color palette, room style, and scale simultaneously, while text refines intent.
+### 2. Multimodal Room Search & Catalog Explorer
+![Multimodal Search](https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198)
+![Catalog Explorer](https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282)
 
 ---
 
-## 📚 Key Dependencies
+## 🔮 Limitations & Future Work
 
-| Library | Purpose |
-|---------|---------|
-| `sentence-transformers` | Part 1 semantic ranking (`all-MiniLM-L6-v2`) |
-| `transformers` + `torch` | CLIP embeddings (`openai/clip-vit-base-patch32`) |
-| `faiss-cpu` | Approximate nearest-neighbor index |
-| `pandas` + `beautifulsoup4` | CSV processing & HTML stripping |
-| `scikit-learn` | cosine similarity utilities |
-| `pillow` + `requests` | Image loading (local + URL) |
-
+- **Inpainting & AR Visualizer:** Incorporating diffusion-based inpainting to virtually place candidate rugs directly onto user floor photos.
+- **Domain Fine-Tuned Encoders:** Fine-tuning CLIP on interior design pairs for improved fabric texture and weave pattern discrimination.
+- **Multilingual Tokenization:** Extending the query parser to support multilingual decor queries.
 
 ---
 
-## 📝 See Also
+## 📄 License
 
-- [`docs/TECHNICAL_SPEC.md`](docs/TECHNICAL_SPEC.md) — Full technical write-up
-- [`notebooks/demo.ipynb`](notebooks/demo.ipynb) — Interactive Colab demo
-- [`tests/test_results.json`](tests/test_results.json) — Latest test run (all 46 PASS)
-
-## Outputs
-<img width="1919" height="872" alt="image" src="https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353" />
-<img width="1860" height="854" alt="image" src="https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a" />
-
-<img width="1918" height="874" alt="image" src="https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198" />
-<img width="1559" height="865" alt="image" src="https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282" />
-
-<img width="1565" height="740" alt="image" src="https://github.com/user-attachments/assets/c7486b1f-a14e-425f-8112-4179dea1b9c7" />
-<img width="1916" height="877" alt="image" src="https://github.com/user-attachments/assets/b7f06d36-1961-4ee4-add1-19c0a5112486" />
-
-
-
-
-
-
+This project is licensed under the [MIT License](LICENSE).

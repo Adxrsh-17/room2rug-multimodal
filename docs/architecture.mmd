@@ -1,11 +1,48 @@
 flowchart LR
-    A[Text Query] --> B[Query Parser]
-    B --> C[Metadata Filter]
-    C --> F[Fusion Score]
-    D[Room Image] --> E[CLIP Encoder]
-    E --> G[FAISS Search]
-    H[Optional Text] --> I[CLIP Text Encoder]
-    I --> J[Cosine Similarity]
-    G --> F
-    J --> F
-    F --> K[Ranked Results]
+    %% Ingestion Cluster
+    subgraph INGESTION["Ingestion Cluster"]
+        direction TB
+        ST_APP["Streamlit Web App<br/>(Room Photo & Text Query)"]
+        PY_ENG["Python 3.10 Engine"]
+        ST_APP -->|webhook / upload| PY_ENG
+    end
+
+    %% NLP & Intent Cluster
+    subgraph NLP_CLUSTER["NLP & Intent Cluster"]
+        direction TB
+        RQP["Regex Query Parser<br/>(Extracts 8x10, shape, color, style)"]
+        HF_ST["Hugging Face & Sentence-Transformers<br/>(all-MiniLM-L6-v2 Dense Text Embeddings)"]
+        RQP --> HF_ST
+    end
+
+    %% Multimodal Vision-Language Cluster
+    subgraph VISION_CLUSTER["Multimodal Vision-Language Cluster"]
+        CLIP["OpenAI CLIP ViT-B/32 + PyTorch<br/>(512-dim Vision-Language Vectors)"]
+    end
+
+    %% Storage & Vector Index Cluster
+    subgraph STORAGE_CLUSTER["Storage & Vector Index Cluster"]
+        direction TB
+        S3["AWS S3<br/>(Amazon Berkeley Objects Catalog)"]
+        FAISS["Meta FAISS<br/>(Sub-millisecond Vector Similarity Search)"]
+        S3 -.->|image embeddings / metadata| FAISS
+    end
+
+    %% Decision & Recommendation Cluster
+    subgraph DECISION_CLUSTER["Decision & Recommendation Cluster"]
+        direction TB
+        FUSION["Dynamic Late Fusion Engine<br/>Mode A / Mode B (0.6 Img + 0.4 Txt) / Mode C"]
+        EXPLAIN["Explainable AI Matcher<br/>(Natural Language Reasoning)"]
+        END_USER["End User / Visual Results<br/>(Top-K Rug Cards with Live Photos)"]
+        
+        FUSION -->|fused ranking| EXPLAIN
+        EXPLAIN --> END_USER
+    end
+
+    %% Cross-Cluster Connections
+    PY_ENG -->|text query| RQP
+    PY_ENG -->|room photo| CLIP
+    
+    HF_ST -->|text similarity| FUSION
+    CLIP -->|visual query vector| FAISS
+    FAISS -->|vector ANN search| FUSION

@@ -38,33 +38,12 @@ E-commerce home decor shopping is inherently visual and spatial. Traditional sea
 
 ## 🏗️ Architecture & Pipeline
 
-```
-                              ┌─────────────────────────────┐
-                              │    User Query (Text/Img)    │
-                              └──────────────┬──────────────┘
-                                             │
-                     ┌───────────────────────┴───────────────────────┐
-                     ▼                                               ▼
-         [ Part 1: Text Search ]                         [ Part 2: Multimodal ]
-  ┌─────────────────────────────────────┐         ┌─────────────────────────────────────┐
-  │  1. Query Parser (Regex/Rules)      │         │  1. Room Context Analyzer           │
-  │     └─ Dimensions, Colors, Styles   │         │     └─ Style, Palette & Room Type   │
-  │  2. Metadata Soft Filter            │         │  2. CLIP ViT-B/32 Embeddings        │
-  │     └─ Size, Color, Style scoring   │         │     └─ Normalized 512-dim Vectors   │
-  │  3. SentenceTransformer Semantic    │         │  3. FAISS / NumPy Vector Index      │
-  │     └─ all-MiniLM-L6-v2 Cosine Sim  │         │     └─ Top-K Candidate Retrieval    │
-  └──────────────────┬──────────────────┘         └──────────────────┬──────────────────┘
-                     │                                               │
-                     ▼                                               ▼
-         [ Final Score: 0.5M + 0.5S ]                    [ Weighted Multimodal Fusion ]
-                     │                                               │
-                     └───────────────────────┬───────────────────────┘
-                                             │
-                                             ▼
-                              ┌─────────────────────────────┐
-                              │ Ranked Results + Explanation│
-                              └─────────────────────────────┘
-```
+![room2rug-multimodal System Architecture](docs/architecture.png)
+
+The system is organized into modular clusters:
+- **Ingestion & NLP:** Streamlit frontend captures room imagery and natural language queries, routed to regex intent parsing and zero-shot context analysis.
+- **Dual Encoders & Index:** SentenceTransformers encodes dense text embeddings while OpenAI CLIP (ViT-B/32) computes 512-dim visual vectors matched against a pre-built Meta FAISS vector index.
+- **Late Fusion & Explanation:** Combines image-text modalities with weighted scoring and generates natural-language match explanations.
 
 ---
 
@@ -230,12 +209,23 @@ All 46 unit and integration tests validate the entire pipeline with complete rep
 
 ## 🖼️ Screenshots & Outputs
 
-### 1. Structured Text Search (`8x10 beige traditional rug`)
+### 1. Structured Text Search & Intent Parsing (`8x10 beige traditional rug`)
+*Parses natural language queries into dimensions (`8x10`), shape (`rectangle`), color (`beige`), and style (`traditional`) using rule-based regex.*  
+*Combines soft metadata matching with SentenceTransformers semantic ranking to return relevant, highly-scored traditional oriental rugs.*
+
 ![Structured Text Search](https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353)
 ![Structured Text Grid](https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a)
 
-### 2. Multimodal Room Search & Catalog Explorer
+### 2. Multimodal Room Search & Dynamic Late Fusion (`images/room1.jpeg` + `modern neutral`)
+*Encodes room interior photography and text queries into 512-dimensional CLIP vectors for sub-millisecond FAISS vector retrieval.*  
+*Fuses visual and textual similarity scores (0.6×img + 0.4×txt) and provides automated natural-language compatibility explanations.*
+
 ![Multimodal Search](https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198)
+
+### 3. Interactive Catalog Explorer & Analytics
+*Allows real-time browsing, size/tag text filtering, and interactive price slider adjustments across all 68 catalog items.*  
+*Renders high-resolution Amazon Berkeley Objects photography alongside interactive Plotly price distribution histograms.*
+
 ![Catalog Explorer](https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282)
 
 ---

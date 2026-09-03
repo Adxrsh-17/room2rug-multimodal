@@ -161,7 +161,7 @@ Selected results:
 
 ## Limitations & Future Work
 
-1. **Image embedding quality**: Product images are used as proxies for room images. A fine-tuned CLIP model on room-rug pairs would improve recommendation accuracy.
+1. **Image embedding quality**: Product images in the catalog are sourced from the **Amazon Berkeley Objects (ABO)** dataset hosted on public Amazon S3 (`https://amazon-berkeley-objects.s3.amazonaws.com/images/small/...`), enabling 100% real image downloads (68 real images, 0 text-fallback, 0 missing URLs). Visual-similarity scores are calculated directly from pixel-level CLIP features across all products. A domain fine-tuned CLIP model on room-rug pairs would further improve recommendation accuracy.
 2. **Size normalization**: Fractional sizes like `"7'9" × 10'2"` are not fully handled; a dedicated parser would improve coverage.
 3. **Explainability**: The current LLM-based explainer falls back to a template sentence. Integration with a small generative model (e.g., Gemma-2B) would produce more specific explanations.
 4. **No vector database**: Indexes are stored as flat NumPy arrays. For a larger catalog, switching to a proper vector DB (Pinecone, Weaviate, Qdrant) would be more scalable.

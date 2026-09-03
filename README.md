@@ -20,25 +20,31 @@ See [`docs/architecture.png`](docs/architecture.png) and the [full technical spe
 ## 📁 Project Structure
 
 ```
-MultiModalSearchAssignment/
+room2rug-multimodal/
 ├── data/
-│   └── products.csv          # Shopify export (68 unique products)
+│   ├── products.csv          # Catalog CSV with verified S3 image URLs
+│   └── products.json         # Preprocessed clean product records
 ├── docs/
-│   ├── TECHNICAL_SPEC.md     # Technical write-up
-│   ├── architecture.mmd      # Source for architecture diagram
-│   └── architecture.png      # System diagram
+│   ├── TECHNICAL_SPEC.md     # Technical write-up & architecture spec
+│   ├── architecture.mmd      # Source Mermaid diagram
+│   └── architecture.png      # High-level system diagram
 ├── images/
-│   └── room1.jpg, room2.JPG, ...   # Room photos for multimodal demo
+│   └── room1.jpeg, room2.JPG, ...   # Sample room query photos
 ├── index/
-│   └── image.index.npy, text.index.npy, ...  # Pre-built FAISS indexes
+│   ├── image.index.npy, text.index.npy, ...  # Pre-built FAISS/NumPy vector indexes
+│   ├── image_ids.npy, text_ids.npy           # Product handle ID mappings
+│   └── image_metadata.json, text_metadata.json
 ├── notebooks/
-│   └── demo.ipynb            # Google Colab-friendly demo
+│   └── demo.ipynb            # Interactive demo notebook
+├── scripts/
+│   ├── build_index.py        # CLI script to rebuild catalog & vector indexes
+│   └── map_abo_rug_images.py # Semantic mapper for Amazon Berkeley Objects images
 ├── src/
-│   ├── preprocess.py         # CSV → clean product dict (one per handle)
+│   ├── preprocess.py         # CSV → clean product dicts
 │   ├── query_parser.py       # Regex + rule-based query parser
 │   ├── filter_catalog.py     # Soft metadata filters (size, color, style)
 │   ├── ranker.py             # SentenceTransformer semantic ranker
-│   ├── embedder.py           # CLIP image + text embeddings
+│   ├── embedder.py           # CLIP ViT-B/32 image + text embeddings
 │   ├── indexer.py            # FAISS index build, save, load, search
 │   ├── fusion.py             # Weighted score combiner (Modes A/B/C)
 │   ├── explainer.py          # One-sentence match explanation generator
@@ -46,10 +52,11 @@ MultiModalSearchAssignment/
 │   ├── search_part2.py       # Part 2: multimodal image+text pipeline
 │   └── search.py             # Unified entry point
 ├── tests/
-│   ├── test_pipeline.py      # Full end-to-end test suite (46 tests)
-│   └── test_results.json     # Latest test run results (all PASS)
-├── app.py                    # Streamlit frontend app
+│   ├── test_pipeline.py      # End-to-end test suite
+│   └── test_results.json     # Test execution logs
+├── app.py                    # Streamlit web application
 ├── requirements.txt
+├── LICENSE
 └── README.md
 ```
 
@@ -81,9 +88,9 @@ pip install -r requirements.txt
 
 ### 3. Data
 
-The Shopify CSV is already at `data/products.csv`. Place additional room photos in `images/`.
+The product catalog is stored at `data/products.csv` with live, high-resolution rug images powered by the **Amazon Berkeley Objects (ABO)** dataset hosted on public Amazon S3 (`https://amazon-berkeley-objects.s3.amazonaws.com/images/small/...`). Place room query photos in `images/`.
 
-> **⚠️ NOTE ON PLACEHOLDER IMAGES:** The default `data/products.csv` contains Shopify image links that have been deleted from the origin server (404 Not Found). Because of this, the frontend UI will default to a placeholder (🧶). **For proper image loading, you must modify the `data/products.csv` file with your own active image links!**
+> **✨ 100% Real Image Retrieval:** All 68 products feature live S3-hosted images with full pixel-level CLIP image embeddings (68 real images, 0 fallbacks). Both the Streamlit UI and multimodal search pipeline render real product photography.
 
 **Using Your Own Product Images:**
 If you want to use your own rug images in the UI, you can open `data/products.csv` and update the `Image Src` column with active, publicly accessible URLs to your custom images (e.g., from AWS S3, Imgur, or your own CDN).

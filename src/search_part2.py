@@ -95,11 +95,14 @@ def _build_product_lookup(catalog: list[dict[str, Any]]) -> dict[str, dict[str, 
 def _build_or_load_indexes(catalog: list[dict[str, Any]], embedder: CLIPEmbedder) -> tuple[Any, list[str], Any, list[str]]:
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
 
+    image_vector_path = Path(str(IMAGE_INDEX_PATH) + ".npy")
+    text_vector_path = Path(str(TEXT_INDEX_PATH) + ".npy")
+
     if (
-        IMAGE_INDEX_PATH.exists()
+        (IMAGE_INDEX_PATH.exists() or image_vector_path.exists())
         and IMAGE_IDS_PATH.exists()
         and IMAGE_METADATA_PATH.exists()
-        and TEXT_INDEX_PATH.exists()
+        and (TEXT_INDEX_PATH.exists() or text_vector_path.exists())
         and TEXT_IDS_PATH.exists()
         and TEXT_METADATA_PATH.exists()
         and not should_rebuild_index(IMAGE_METADATA_PATH, len(catalog))

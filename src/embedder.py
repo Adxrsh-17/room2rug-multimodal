@@ -82,7 +82,7 @@ class CLIPEmbedder:
             if parsed.scheme in {"http", "https"}:
                 if requests is None:
                     raise ImportError("requests is required to download remote images") from _IMPORT_ERROR
-                for timeout in (10, 15):
+                for timeout in (3, 5):
                     try:
                         response = requests.get(text_source, timeout=timeout)
                         response.raise_for_status()
@@ -97,7 +97,17 @@ class CLIPEmbedder:
 
         raise TypeError("image_source must be a file path, URL, or PIL Image")
 
-    def _l2_numpy(self, tensor: "torch.Tensor") -> np.ndarray:
+    def _extract_tensor(self, features: Any) -> "torch.Tensor":
+        if hasattr(features, "pooler_output") and features.pooler_output is not None:
+            return features.pooler_output
+        if hasattr(features, "last_hidden_state") and features.last_hidden_state is not None:
+            return features.last_hidden_state
+        if isinstance(features, (tuple, list)):
+            return features[0]
+        return features
+
+    def _l2_numpy(self, tensor: Any) -> np.ndarray:
+        tensor = self._extract_tensor(tensor)
         normalized = self._normalize(tensor).detach().cpu().numpy()
         return normalized.squeeze().astype(np.float32)
 
@@ -180,6 +190,8 @@ def embed_product_catalog(catalog: list[dict[str, Any]], embedder: CLIPEmbedder 
     image_cache: dict[str, np.ndarray | None] = {}
     embedded_products: list[dict[str, Any]] = []
 
+    stats = {"real_image": 0, "text_fallback": 0, "no_image_url": 0}
+
     for product in catalog:
         title = str(product.get("title") or "").strip()
         tags = str(product.get("tags") or "").strip()
@@ -190,28 +202,40 @@ def embed_product_catalog(catalog: list[dict[str, Any]], embedder: CLIPEmbedder 
         text_embedding = embedder.embed_text(" ".join(part for part in [title, tags] if part).strip())
 
         image_url = str(product.get("image_url") or "").strip()
-        if image_url in image_cache:
+
+        if not image_url:
+            image_embedding = None
+        elif image_url in image_cache:
             image_embedding = image_cache[image_url]
         else:
-            if image_url.startswith("http") and text_embedding is not None:
-                image_embedding = text_embedding
-            else:
-                image_embedding = embedder.embed_image(image_url) if image_url else None
-                if image_embedding is None and text_embedding is not None:
-                    image_embedding = text_embedding
+            image_embedding = embedder.embed_image(image_url)
             image_cache[image_url] = image_embedding
-            if image_url and not image_url.startswith("http"):
+            if not image_url.startswith("http"):
                 time.sleep(0.1)
+
+        if image_embedding is not None:
+            image_source = "image"
+            stats["real_image"] += 1
+        elif text_embedding is not None:
+            image_embedding = text_embedding
+            image_source = "text_fallback"
+            stats["text_fallback"] += 1
+        else:
+            image_source = "none"
+            stats["no_image_url"] += 1
+
         if text_embedding is None and image_embedding is not None:
             text_embedding = image_embedding
 
-        embedded_products.append(
-            {
-                **product,
-                "image_embedding": image_embedding,
-                "text_embedding": text_embedding,
-            }
-        )
+        embedded_products.append({
+            **product,
+            "image_embedding": image_embedding,
+            "text_embedding": text_embedding,
+            "image_embedding_source": image_source,
+        })
+
+    print(f"Catalog embedding: {stats['real_image']} real images, "
+          f"{stats['text_fallback']} text-fallback, {stats['no_image_url']} missing URL")
 
     return embedded_products
 

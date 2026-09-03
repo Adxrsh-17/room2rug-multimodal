@@ -230,13 +230,27 @@ All 46 unit and integration tests validate the entire pipeline with complete rep
 
 ## 🖼️ Screenshots & Outputs
 
-### 1. Structured Text Search (`8x10 beige traditional rug`)
-![Structured Text Search](https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353)
-![Structured Text Grid](https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a)
+<img width="1917" height="881" alt="image" src="https://github.com/user-attachments/assets/9fff2b16-8042-4375-95a6-53b135372bb9" />
 
-### 2. Multimodal Room Search & Catalog Explorer
-![Multimodal Search](https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198)
-![Catalog Explorer](https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282)
+<img width="1422" height="757" alt="image" src="https://github.com/user-attachments/assets/28dc6b51-02fd-45da-9e1d-1b618c23d0d4" />
+
+<img width="1486" height="735" alt="image" src="https://github.com/user-attachments/assets/e7b24ca3-a983-4841-b308-c6c409eee11f" />
+
+<img width="1917" height="877" alt="image" src="https://github.com/user-attachments/assets/35bf7ac9-1735-4bff-9d2e-06a88aa9a5e6" />
+
+<img width="1917" height="817" alt="image" src="https://github.com/user-attachments/assets/020e4235-2580-4136-ae6f-bd9dc3a16c50" />
+
+<img width="1580" height="835" alt="image" src="https://github.com/user-attachments/assets/62d77479-965b-42a8-b902-bfe2187047d6" />
+
+<img width="1576" height="513" alt="image" src="https://github.com/user-attachments/assets/b3802397-75c6-477f-8889-25394f012e1d" />
+
+<img width="1892" height="833" alt="image" src="https://github.com/user-attachments/assets/24a167c3-1285-42cf-b2ea-459a20a899ab" />
+
+
+
+
+
+
 
 ---
 

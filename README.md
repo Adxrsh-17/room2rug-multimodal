@@ -213,20 +213,24 @@ All 46 unit and integration tests validate the entire pipeline with complete rep
 *Parses natural language queries into dimensions (`8x10`), shape (`rectangle`), color (`beige`), and style (`traditional`) using rule-based regex.*  
 *Combines soft metadata matching with SentenceTransformers semantic ranking to return relevant, highly-scored traditional oriental rugs.*
 
-![Structured Text Search](https://github.com/user-attachments/assets/9174995e-5138-4531-80a0-2f490c326353)
-![Structured Text Grid](https://github.com/user-attachments/assets/570fd7c1-602c-4849-a73b-b1852e1c399a)
+<img width="1917" height="881" alt="Structured Text Search" src="https://github.com/user-attachments/assets/9fff2b16-8042-4375-95a6-53b135372bb9" />
+<img width="1422" height="757" alt="Structured Text Results Grid" src="https://github.com/user-attachments/assets/28dc6b51-02fd-45da-9e1d-1b618c23d0d4" />
 
 ### 2. Multimodal Room Search & Dynamic Late Fusion (`images/room1.jpeg` + `modern neutral`)
 *Encodes room interior photography and text queries into 512-dimensional CLIP vectors for sub-millisecond FAISS vector retrieval.*  
 *Fuses visual and textual similarity scores (0.6×img + 0.4×txt) and provides automated natural-language compatibility explanations.*
 
-![Multimodal Search](https://github.com/user-attachments/assets/6ea990b1-e8e9-4090-a57d-24c9d879a198)
+<img width="1486" height="735" alt="Multimodal Room Query Input" src="https://github.com/user-attachments/assets/e7b24ca3-a983-4841-b308-c6c409eee11f" />
+<img width="1917" height="877" alt="Multimodal Results Top Matches" src="https://github.com/user-attachments/assets/35bf7ac9-1735-4bff-9d2e-06a88aa9a5e6" />
+<img width="1917" height="817" alt="Multimodal Explanations and Similarity Breakdown" src="https://github.com/user-attachments/assets/020e4235-2580-4136-ae6f-bd9dc3a16c50" />
 
 ### 3. Interactive Catalog Explorer & Analytics
 *Allows real-time browsing, size/tag text filtering, and interactive price slider adjustments across all 68 catalog items.*  
-*Renders high-resolution Amazon Berkeley Objects photography alongside interactive Plotly price distribution histograms.*
+*Renders high-resolution Amazon Berkeley Objects photography alongside interactive Plotly price distribution histograms and tag frequencies.*
 
-![Catalog Explorer](https://github.com/user-attachments/assets/7702461c-53af-4450-885d-be6131701282)
+<img width="1580" height="835" alt="Catalog Explorer Product Gallery" src="https://github.com/user-attachments/assets/62d77479-965b-42a8-b902-bfe2187047d6" />
+<img width="1576" height="513" alt="Catalog Data Table" src="https://github.com/user-attachments/assets/b3802397-75c6-477f-8889-25394f012e1d" />
+<img width="1892" height="833" alt="Catalog Price Distribution and Tag Charts" src="https://github.com/user-attachments/assets/24a167c3-1285-42cf-b2ea-459a20a899ab" />
 
 ---
 

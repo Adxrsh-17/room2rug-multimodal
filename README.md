@@ -26,9 +26,9 @@ E-commerce home decor shopping is inherently visual and spatial. Traditional sea
   - **Structured Text:** Regex parsing for dimensions (`8x10`, `Runner 2x10`), color palettes, styles, and size classes.
   - **Multimodal Visuals:** Image-to-image and image+text visual search using normalized CLIP feature vectors.
 - **⚖️ Dynamic Late Fusion:**
-  - **Mode A (Image Only):** Computes direct visual similarity between the room and catalog items ($1.0 \times \text{img\_sim}$).
-  - **Mode B (Multimodal):** Fuses visual harmony with textual intent ($0.6 \times \text{img\_sim} + 0.4 \times \text{txt\_sim}$).
-  - **Mode C (Text Only):** Falls back to dense semantic text embedding ($1.0 \times \text{txt\_sim}$).
+  - **Mode A (Image Only):** Computes direct visual similarity between the room and catalog items (`1.0 × image_similarity`).
+  - **Mode B (Multimodal):** Fuses visual harmony with textual intent (`0.6 × image_similarity + 0.4 × text_similarity`).
+  - **Mode C (Text Only):** Falls back to dense semantic text embedding (`1.0 × text_similarity`).
 - **⚡ High-Performance Vector Indexing:** Pre-computed FAISS inner-product index with automatic NumPy fallback for instant query latency.
 - **💬 Explainable AI Recommendations:** Generates automated one-sentence explanations highlighting color, pattern, and aesthetic compatibility.
 - **🌐 Interactive Streamlit Dashboard:** Modern dark-mode UI with live image rendering, metric breakdowns, and interactive catalog filters.

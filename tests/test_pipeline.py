@@ -426,9 +426,10 @@ def print_summary() -> None:
             print(f"  ❌ {record['test']}")
             print(f"     → {record['details']}")
 
-    with open(ROOT / "test_results.json", "w", encoding="utf-8") as file_handle:
+    out_path = ROOT / "tests" / "test_results.json"
+    with open(out_path, "w", encoding="utf-8") as file_handle:
         json.dump(RESULTS_LOG, file_handle, indent=2)
-    print("\n  Full log saved to test_results.json")
+    print(f"\n  Full log saved to {out_path.name}")
 
     sys.exit(0 if len(failed) == 0 else 1)
 

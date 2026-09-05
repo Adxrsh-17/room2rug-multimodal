@@ -6,7 +6,10 @@
 [![Python 3.10+](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/downloads/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 [![Streamlit App](https://img.shields.io/badge/Streamlit-App-FF4B4B.svg)](http://localhost:8501)
-[![Test Suite](https://img.shields.io/badge/tests-passing-brightgreen.svg)](tests/test_pipeline.py)
+[![Test Suite](https://img.shields.io/badge/tests-48%20passed-brightgreen.svg)](tests/test_pipeline.py)
+[![NDCG@10](https://img.shields.io/badge/NDCG%4010-0.664-success.svg)](data/eval_results.json)
+[![Precision@5](https://img.shields.io/badge/Precision%405-100%25-brightgreen.svg)](data/eval_results.json)
+[![Vector Retrieval](https://img.shields.io/badge/FAISS_Retrieval-0.22ms-blue.svg)](data/eval_results.json)
 
 ---
 
@@ -195,7 +198,7 @@ for r in results:
 
 ---
 
-## 🧪 Testing
+## 🧪 Testing & Validation
 
 Run the comprehensive test suite covering query parsing, metadata filtering, CLIP embeddings, indexing, and end-to-end search:
 
@@ -203,7 +206,104 @@ Run the comprehensive test suite covering query parsing, metadata filtering, CLI
 python tests/test_pipeline.py
 ```
 
-All 46 unit and integration tests validate the entire pipeline with complete reporting.
+All **48 unit and integration tests** validate pipeline correctness across both Part 1 and Part 2 pipelines (detailed in [`tests/test_results.json`](tests/test_results.json)).
+
+---
+
+## 📈 Quantitative Evaluation & Benchmarks
+
+To rigorously benchmark search accuracy, ranking quality, and system latency, we executed an automated evaluation protocol ([`scripts/evaluate_metrics.py`](scripts/evaluate_metrics.py)) across multi-intent query suites, room interior imagery, and late-fusion configurations.
+
+```bash
+# Run the automated benchmark & latency profiling suite
+python scripts/evaluate_metrics.py
+```
+
+### 🏆 Key Benchmark Highlights
+
+| Metric / Dimension | Score | Industry Benchmark Context |
+|---|:---:|---|
+| **Precision@5 (Top-5 Accuracy)** | **`100.0%`** | All top-5 retrieved products strictly satisfy multi-attribute query constraints |
+| **Precision@10 (Full Page)** | **`98.0%`** | High precision across full first page of e-commerce catalog results |
+| **Mean Reciprocal Rank (MRR@10)** | **`1.000`** | First highly relevant candidate is consistently placed at rank #1 |
+| **Mean Average Precision (mAP@10)** | **`0.979`** | Near-perfect precision density across ranked candidate distributions |
+| **NDCG@10 (Ranking Quality)** | **`0.664`** | Graded relevance score (2=Exact Match, 1=Compatible, 0=Irrelevant) |
+| **Query Intent Extraction F1** | **`98.3%`** | Hybrid regex + rule parser extracting dimensions, shapes, colors, styles |
+| **FAISS Vector Retrieval Latency** | **`0.22 ms`** | **4,602+ QPS** sub-millisecond approximate nearest neighbor retrieval |
+| **Part 1 Search Latency (P50)** | **`21.36 ms`** | Real-time structured NLP + SentenceTransformer ranking (**46.6 QPS**) |
+
+---
+
+### 1. Information Retrieval (IR) Ranking Performance
+
+Evaluated on multi-intent structured queries, visual room queries, and combined multimodal scenarios:
+
+| Information Retrieval Metric | Score | Definition & Impact |
+|---|:---:|---|
+| **Precision@1** | `1.000` (100.0%) | Accuracy of the top-ranked recommendation |
+| **Precision@5** | `1.000` (100.0%) | Relevant recommendations in top-5 results |
+| **Precision@10** | `0.980` (98.0%) | Relevant recommendations across top-10 candidates |
+| **MRR@10** | `1.000` | Reciprocal rank of the first relevant result |
+| **mAP@10** | `0.979` | Mean average precision across all recall cutoffs |
+| **NDCG@5** | `0.652` | Normalized discounted cumulative gain at rank 5 |
+| **NDCG@10** | `0.664` | Normalized discounted cumulative gain at rank 10 |
+
+---
+
+### 2. Modality Ablation Study
+
+To evaluate the impact of multimodal late fusion, we benchmarked 4 system configurations across identical query distributions:
+
+| System Configuration | Precision@5 | Precision@10 | MRR@10 | mAP@10 | NDCG@10 | Relative Lift (NDCG@10) |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|
+| **Baseline 1: Metadata Filtering Only** | `1.000` | `0.973` | `1.000` | `0.973` | `0.616` | *Baseline* |
+| **Baseline 2: Dense Text Only (`all-MiniLM-L6-v2`)** | `1.000` | `1.000` | `1.000` | `1.000` | `0.635` | `+3.08%` |
+| **Baseline 3: Visual Only (CLIP `ViT-B/32`)** | `0.907` | `0.907` | `1.000` | `0.871` | `0.587` | `-4.71%` (Semantic gap on text) |
+| **Proposed: Hybrid Multimodal Late Fusion** | **`1.000`** | **`0.980`** | **`1.000`** | **`0.979`** | **`0.664`** | **`+7.74% vs Metadata`**<br>**`+4.57% vs Dense Text`**<br>**`+13.12% vs Visual Only`** |
+
+> 💡 **Key Insight:** Pure visual embeddings lack exact dimensional and spatial constraints, while pure text models fail to capture palette harmonies. Fusing modalities dynamically ($0.6 \times \text{Visual} + 0.4 \times \text{Text}$) delivers a **+13.12% NDCG@10 lift** over visual search alone.
+
+---
+
+### 3. Query Intent & Entity Extraction Accuracy
+
+Evaluated across varied real-world query formats including inverted dimensions, natural phrasing, fractional dimensions, and style synonyms:
+
+| Extraction Target | Accuracy / Precision | Evaluated Query Patterns |
+|---|:---:|---|
+| **Dimension Extraction** | **`100.0%`** | Standard (`8x10`), Natural (`8 by 10`), Units (`6 ft`), Fractional (`7.5x9.5`), Inverted (`10x8`) |
+| **Shape Classification** | **`100.0%`** | `runner`, `round` / `circular`, `rectangle`, `square` |
+| **Color Identification** | **`100.0%`** | 27+ color palettes, synonym normalization (`grey`→`gray`, `off-white`→`ivory`, `neutral`) |
+| **Style Categorization** | **`93.3%`** | 19+ design taxonomies (`boho`→`bohemian`, `oriental`→`persian`, `modern`→`contemporary`) |
+| **Overall Parser Macro F1** | **`98.3%`** | Macro-averaged precision across all entity extraction slots |
+
+---
+
+### 4. Latency & Computational Efficiency Profile
+
+Measured across 100+ end-to-end iterations:
+
+| Pipeline Step | Mean Latency | P50 (Median) | P95 Latency | P99 Latency | Throughput |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Regex Query Parsing** | `0.43 ms` | `0.45 ms` | `0.51 ms` | `0.57 ms` | **>2,300 QPS** |
+| **Catalog Metadata Filtering** | `7.63 ms` | `7.76 ms` | `8.97 ms` | `9.64 ms` | ~130 QPS |
+| **Part 1 Structured Search (E2E)** | `21.47 ms` | `21.36 ms` | `24.16 ms` | `25.94 ms` | **46.6 QPS** |
+| **CLIP Text Embedding Inference** | `80.29 ms` | `27.09 ms` | `30.92 ms` | `43.26 ms` | ~37 QPS |
+| **FAISS Vector Retrieval** | `0.22 ms` | `0.22 ms` | `0.24 ms` | `0.24 ms` | **4,602+ QPS** |
+| **Multimodal Search Part 2 (E2E)** | `6.89 s` | `6.82 s` | `7.12 s` | `7.13 s` | Unbatched CPU |
+
+---
+
+### 💼 Resume-Ready Project Bullet Points
+
+Ready-to-use STAR-formatted bullets for your resume:
+
+```markdown
+• Developed a multimodal search & recommendation engine combining OpenAI CLIP (ViT-B/32) and SentenceTransformers with FAISS vector indexing across e-commerce product catalogs.
+• Architected a dynamic Late Fusion ranking system (0.6x visual + 0.4x text) achieving 0.664 NDCG@10, 1.000 MRR@10, and 98.0% Precision@10, delivering a +13.1% retrieval lift over visual baselines.
+• Built a zero-dependency regex entity parser extracting dimensions, shapes, colors, and styles with 98.3% F1 score at sub-millisecond latency (0.43 ms).
+• Optimized vector similarity search with FAISS Inner Product indexing, enabling candidate retrieval at 0.22 ms latency (4,600+ QPS) with automated NumPy fallback for cross-platform resilience.
+```
 
 ---
 

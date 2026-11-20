@@ -1,0 +1,37 @@
+{
+  "version": "1.0",
+  "project": "room2rug-multimodal",
+  "generated_at": "2026-11-20T17:30:00Z",
+  "artifacts": {
+    "data/products.json": {
+      "sha256": "bebd46c0500946e7fdab319dd10a3d7a0f95863a7c490da62d1f97ac0aeeff8e",
+      "size_bytes": 207976,
+      "description": "Cleaned ABO rug catalog with normalized attributes"
+    },
+    "data/products.csv": {
+      "sha256": "1857715f99ac1b722e10e93769ca0fc4259e08e32d2ab06298424ab6488c509a",
+      "size_bytes": 298098,
+      "description": "Tabular format of cleaned catalog for fast pandas queries"
+    },
+    "data/gold_labels.json": {
+      "sha256": "1fcd08664600d496f21284b2dea815a84ff74ceb558e1339cfff7872d20c5ae9",
+      "size_bytes": 76234,
+      "description": "Human gold evaluation annotations (graded 0/1/2) collected via Streamlit"
+    },
+    "data/test_queries.json": {
+      "sha256": "41bd15358b3658c5dff654f94b00e9b149b2a411a73535ae5f9fe223f3463e32",
+      "size_bytes": 18609,
+      "description": "Held-out test split queries with pooled candidate candidate rug ids"
+    },
+    "models/retrieval_adapter.pt": {
+      "sha256": "03137162074387ccc9cca62101ab12f5eaa7d57d5ec2cf7305132c256a5be42a",
+      "size_bytes": 4215698,
+      "description": "Trained residual contrastive projection adapter (InfoNCE with hard negatives)"
+    },
+    "models/lambdamart_reranker.txt": {
+      "sha256": "9395c75b8d27099a627f44568ad645eaafc2ef8455c5fbcffbdce3b1e238ad36",
+      "size_bytes": 18887,
+      "description": "Trained LightGBM LambdaMART ranker booster checkpoint"
+    }
+  }
+}

@@ -26,16 +26,20 @@ jobs:
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install ruff pytest pyyaml numpy pandas
+          pip install ruff pytest pytest-cov pyyaml numpy pandas scikit-learn lightgbm faiss-cpu fastapi psutil rank-bm25
 
       - name: Lint Code with Ruff
         run: |
-          ruff check src tests
+          ruff check .
 
       - name: Verify Code Formatting with Ruff
         run: |
-          ruff format --check src tests
+          ruff format --check .
 
-      - name: Run Fast Unit Tests
+      - name: Run Unit & Leakage Tests
         run: |
-          pytest tests/test_seed.py tests/test_config.py tests/test_baseline_v1_unit.py -v
+          pytest tests/test_seed.py tests/test_config.py tests/test_leakage.py tests/test_baseline_v1_unit.py tests/test_metrics.py tests/test_cielab.py tests/test_explain.py -v
+
+      - name: Automated Quality Gate (Lineage, Regression & Latency)
+        run: |
+          python scripts/ci_quality_gate.py

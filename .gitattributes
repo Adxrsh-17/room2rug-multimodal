@@ -1,0 +1,4 @@
+# Ensure LightGBM models and manifests maintain LF line endings across platforms
+*.txt text eol=lf
+models/*.txt text eol=lf
+*.json text eol=lf

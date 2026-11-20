@@ -27,8 +27,12 @@ label:
 train-retrieval:
 	$(PYTHON) train_retrieval.py
 
+train-reranker:
+	$(PYTHON) train_reranker.py
+
 ablate:
 	$(PYTHON) scripts/run_ablations.py
+
 
 
 audit:

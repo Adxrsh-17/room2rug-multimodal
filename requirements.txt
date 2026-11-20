@@ -13,4 +13,6 @@ pyyaml>=6.0
 mlflow>=2.5.0
 streamlit>=1.25.0
 rank-bm25>=0.2.2
+lightgbm>=4.0.0
+
 

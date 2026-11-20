@@ -6,10 +6,10 @@ Measured under sustained multi-threaded concurrency using Python concurrent clie
 
 | Concurrency (Simulated Users) | Throughput (RPS) | Latency P50 (ms) | Latency P90 (ms) | Latency P95 (ms) | Latency P99 (ms) | Error Rate |
 |:---:|:---:|:---:|:---:|:---:|:---:|:---:|
-| **1 concurrent** | **0.1 req/s** | 11165.0 ms | 11520.4 ms | 11993.1 ms | 13263.2 ms | 0.0% |
-| **5 concurrent** | **0.3 req/s** | 15724.6 ms | 22325.2 ms | 23202.2 ms | 24292.4 ms | 0.0% |
-| **10 concurrent** | **0.1 req/s** | 27958.3 ms | 199882.8 ms | 202607.1 ms | 205209.6 ms | 0.0% |
-| **20 concurrent** | **0.1 req/s** | 55542.4 ms | 246404.0 ms | 248563.3 ms | 248879.8 ms | 0.0% |
+| **1 concurrent** | **0.1 req/s** | 11221.4 ms | 12182.8 ms | 13497.0 ms | 19235.5 ms | 0.0% |
+| **5 concurrent** | **0.1 req/s** | 17919.7 ms | 195368.9 ms | 195991.4 ms | 197868.3 ms | 0.0% |
+| **10 concurrent** | **0.1 req/s** | 25831.3 ms | 232803.6 ms | 236779.4 ms | 237146.4 ms | 0.0% |
+| **20 concurrent** | **0.1 req/s** | 125831.4 ms | 223393.0 ms | 224571.8 ms | 235828.3 ms | 0.0% |
 
 ### Concurrency & Saturation Summary
 

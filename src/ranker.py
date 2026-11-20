@@ -53,7 +53,9 @@ def _clip_negative(values: np.ndarray) -> np.ndarray:
     return clipped
 
 
-def rank_products(parsed_query: dict[str, Any], catalog: list[dict[str, Any]], raw_query: str, top_k: int = 10) -> list[dict[str, Any]]:
+def rank_products(
+    parsed_query: dict[str, Any], catalog: list[dict[str, Any]], raw_query: str, top_k: int = 10
+) -> list[dict[str, Any]]:
     if not catalog:
         raise ValueError("Catalog is empty")
 
@@ -105,13 +107,15 @@ def rank_products(parsed_query: dict[str, Any], catalog: list[dict[str, Any]], r
     return filtered[:top_k]
 
 
-def rank_results(parsed_query: dict[str, Any], catalog: list[dict[str, Any]], raw_query: str, top_k: int = 10) -> list[dict[str, Any]]:
+def rank_results(
+    parsed_query: dict[str, Any], catalog: list[dict[str, Any]], raw_query: str, top_k: int = 10
+) -> list[dict[str, Any]]:
     return rank_products(parsed_query, catalog, raw_query, top_k=top_k)
 
 
 if __name__ == "__main__":
-    from pathlib import Path
     import json
+    from pathlib import Path
 
     from .preprocess import build_catalog
     from .query_parser import parse_query

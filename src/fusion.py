@@ -71,21 +71,27 @@ def merge_candidates(
         entry["low_confidence"] = False
         candidates.append(entry)
 
-    candidates.sort(key=lambda item: (float(item.get("fusion_score", 0.0)), float(item.get("price") or 0.0)), reverse=True)
+    candidates.sort(
+        key=lambda item: (float(item.get("fusion_score", 0.0)), float(item.get("price") or 0.0)), reverse=True
+    )
     return candidates
 
 
 def annotate_confidence(candidates: list[dict[str, Any]]) -> list[dict[str, Any]]:
     if not candidates:
         return candidates
-    low_confidence = max(float(candidate.get("fusion_score", 0.0)) for candidate in candidates) < LOW_CONFIDENCE_THRESHOLD
+    low_confidence = (
+        max(float(candidate.get("fusion_score", 0.0)) for candidate in candidates) < LOW_CONFIDENCE_THRESHOLD
+    )
     for candidate in candidates:
         candidate["low_confidence"] = low_confidence
     return candidates
 
 
 def rank_candidates(items: Iterable[dict[str, Any]]) -> list[dict[str, Any]]:
-    return sorted(items, key=lambda item: (float(item.get("fusion_score", 0.0)), float(item.get("price") or 0.0)), reverse=True)
+    return sorted(
+        items, key=lambda item: (float(item.get("fusion_score", 0.0)), float(item.get("price") or 0.0)), reverse=True
+    )
 
 
 if __name__ == "__main__":

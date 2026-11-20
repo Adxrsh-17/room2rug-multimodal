@@ -170,7 +170,9 @@ def filter_products(parsed_query: dict[str, Any], catalog: list[dict[str, Any]])
     if not catalog:
         raise ValueError("Catalog is empty")
 
-    size_requested = bool(parsed_query.get("dimensions") or parsed_query.get("size_class") or parsed_query.get("shape") == "runner")
+    size_requested = bool(
+        parsed_query.get("dimensions") or parsed_query.get("size_class") or parsed_query.get("shape") == "runner"
+    )
     matched_products: list[dict[str, Any]] = []
     size_match_found = False
 
@@ -206,8 +208,8 @@ def filter_products(parsed_query: dict[str, Any], catalog: list[dict[str, Any]])
 
 
 if __name__ == "__main__":
-    from pathlib import Path
     import json
+    from pathlib import Path
 
     from .preprocess import build_catalog
     from .query_parser import parse_query

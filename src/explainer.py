@@ -36,4 +36,4 @@ def explain_match(
 if __name__ == "__main__":
     demo_product = {"title": "Vintage Persian Area Rug 8x10", "tags": "traditional, beige, oriental"}
     print(explain_match(demo_product, "warm neutral living room", "traditional 8x10"))
-    print(explain_match(demo_product, "", "", llm_callable=lambda prompt: "It matches the room well.") )
+    print(explain_match(demo_product, "", "", llm_callable=lambda prompt: "It matches the room well."))

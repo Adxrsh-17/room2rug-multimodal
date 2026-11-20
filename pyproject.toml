@@ -39,11 +39,16 @@ dev = [
 
 [tool.setuptools.packages.find]
 where = ["."]
-include = ["src*", "src.baseline_v1*", "src.utils*"]
+include = ["src*", "src.baseline_v1*", "src.utils*", "src.data*"]
 
 [tool.ruff]
 line-length = 120
 target-version = "py310"
+exclude = [
+    "src/baseline_v1",
+    "tests/legacy_test_pipeline.py",
+    "scratch",
+]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "W"]

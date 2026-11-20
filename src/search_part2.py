@@ -4,8 +4,6 @@ import json
 from pathlib import Path
 from typing import Any
 
-from PIL import Image
-
 from .embedder import CLIPEmbedder, embed_product_catalog
 from .explainer import explain_match
 from .fusion import annotate_confidence, determine_mode, merge_candidates, rank_candidates
@@ -92,7 +90,9 @@ def _build_product_lookup(catalog: list[dict[str, Any]]) -> dict[str, dict[str, 
     return {str(product.get("handle")): product for product in catalog if product.get("handle")}
 
 
-def _build_or_load_indexes(catalog: list[dict[str, Any]], embedder: CLIPEmbedder) -> tuple[Any, list[str], Any, list[str]]:
+def _build_or_load_indexes(
+    catalog: list[dict[str, Any]], embedder: CLIPEmbedder
+) -> tuple[Any, list[str], Any, list[str]]:
     INDEX_DIR.mkdir(parents=True, exist_ok=True)
 
     image_vector_path = Path(str(IMAGE_INDEX_PATH) + ".npy")
@@ -238,7 +238,9 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     try:
-        results = search_multimodal(args.room_image, args.text, top_k=args.top_k, csv_path=args.csv, include_explanations=args.explain)
+        results = search_multimodal(
+            args.room_image, args.text, top_k=args.top_k, csv_path=args.csv, include_explanations=args.explain
+        )
         print(json.dumps(results, indent=2))
     except Exception as exc:
         print(f"Multimodal search failed: {exc}")

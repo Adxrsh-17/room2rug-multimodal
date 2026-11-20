@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from pathlib import Path
 import re
+from pathlib import Path
 from typing import Any
 
 import pandas as pd
@@ -61,7 +61,9 @@ def _collect_sizes(group: pd.DataFrame) -> list[str]:
         for value in group[column].tolist():
             text = _normalize_size_label(value)
             if text and text not in size_values:
-                if DIMENSION_PATTERN.search(text) or any(keyword in text.lower() for keyword in ["runner", "round", "square", "x"]):
+                if DIMENSION_PATTERN.search(text) or any(
+                    keyword in text.lower() for keyword in ["runner", "round", "square", "x"]
+                ):
                     size_values.append(text)
     return size_values
 
@@ -91,16 +93,16 @@ def build_catalog(csv_path: str | Path) -> list[dict[str, Any]]:
         if image_url and image_url.startswith("//"):
             image_url = f"https:{image_url}"
         sizes = _collect_sizes(group)
-        size = sizes[0] if sizes else _first_non_empty(primary_row.get("Option1 Value"), primary_row.get("Variant Title"))
+        size = (
+            sizes[0] if sizes else _first_non_empty(primary_row.get("Option1 Value"), primary_row.get("Variant Title"))
+        )
         price = _extract_price(group)
         style = _first_non_empty(primary_row.get("Type"), tags)
-        color = _first_non_empty(primary_row.get("Option1 Value"), primary_row.get("Option2 Value"), primary_row.get("Option3 Value"))
+        color = _first_non_empty(
+            primary_row.get("Option1 Value"), primary_row.get("Option2 Value"), primary_row.get("Option3 Value")
+        )
 
-        searchable_text = " ".join(
-            part.lower()
-            for part in [title, tags, body]
-            if part
-        ).strip()
+        searchable_text = " ".join(part.lower() for part in [title, tags, body] if part).strip()
 
         records.append(
             {

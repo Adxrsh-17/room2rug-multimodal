@@ -1,6 +1,6 @@
-from __future__ import annotations
-
 """Unified search entry point — exposes both Part 1 and Part 2 pipelines."""
+
+from __future__ import annotations
 
 from .search_part1 import search_part1, search_structured
 from .search_part2 import search_multimodal
@@ -12,9 +12,7 @@ def main() -> None:
     import argparse
     import json
 
-    parser = argparse.ArgumentParser(
-        description="Multimodal Rug Search — run Part 1 (text) or Part 2 (image+text)."
-    )
+    parser = argparse.ArgumentParser(description="Multimodal Rug Search — run Part 1 (text) or Part 2 (image+text).")
     subparsers = parser.add_subparsers(dest="command")
 
     # Part 1 sub-command
@@ -41,8 +39,10 @@ def main() -> None:
     elif args.command == "image":
         try:
             results = search_multimodal(
-                args.room_image, args.text,
-                top_k=args.top_k, csv_path=args.csv,
+                args.room_image,
+                args.text,
+                top_k=args.top_k,
+                csv_path=args.csv,
                 include_explanations=args.explain,
             )
             print(json.dumps(results, indent=2))

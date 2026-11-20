@@ -27,7 +27,9 @@ def search_part1(query: str, csv_path: str | Path = "data/products.csv", top_k: 
     return results
 
 
-def search_structured(query: str, catalog: list[dict[str, Any]] | str | Path = "data/products.csv", top_k: int = 10) -> list[dict[str, Any]]:
+def search_structured(
+    query: str, catalog: list[dict[str, Any]] | str | Path = "data/products.csv", top_k: int = 10
+) -> list[dict[str, Any]]:
     if isinstance(catalog, (str, Path)):
         return search_part1(query, catalog, top_k=top_k)
 

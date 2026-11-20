@@ -8,7 +8,7 @@ from typing import Any, Iterable
 from urllib.parse import urlparse
 
 import numpy as np
-from PIL import Image, ImageOps
+from PIL import Image
 
 try:
     import requests
@@ -227,15 +227,19 @@ def embed_product_catalog(catalog: list[dict[str, Any]], embedder: CLIPEmbedder 
         if text_embedding is None and image_embedding is not None:
             text_embedding = image_embedding
 
-        embedded_products.append({
-            **product,
-            "image_embedding": image_embedding,
-            "text_embedding": text_embedding,
-            "image_embedding_source": image_source,
-        })
+        embedded_products.append(
+            {
+                **product,
+                "image_embedding": image_embedding,
+                "text_embedding": text_embedding,
+                "image_embedding_source": image_source,
+            }
+        )
 
-    print(f"Catalog embedding: {stats['real_image']} real images, "
-          f"{stats['text_fallback']} text-fallback, {stats['no_image_url']} missing URL")
+    print(
+        f"Catalog embedding: {stats['real_image']} real images, "
+        f"{stats['text_fallback']} text-fallback, {stats['no_image_url']} missing URL"
+    )
 
     return embedded_products
 
@@ -254,8 +258,6 @@ def embed_text(text: str) -> np.ndarray | None:
 
 
 if __name__ == "__main__":
-    import json
-
     demo = CLIPEmbedder()
     print("CLIP available:", demo.available)
     print("Empty text:", demo.embed_text(""))

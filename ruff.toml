@@ -1,5 +1,10 @@
 line-length = 120
 target-version = "py310"
+exclude = [
+    "src/baseline_v1",
+    "tests/legacy_test_pipeline.py",
+    "scratch",
+]
 
 [lint]
 select = ["E", "F", "I", "W"]

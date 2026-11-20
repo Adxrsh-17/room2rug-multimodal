@@ -116,7 +116,14 @@ def _index_vector_path(index_path: str | Path) -> Path:
     return Path(str(index_path) + ".npy")
 
 
-def save_index(index: Any, index_path: str | Path, product_ids: list[str], ids_path: str | Path, metadata_path: str | Path, product_count: int) -> None:
+def save_index(
+    index: Any,
+    index_path: str | Path,
+    product_ids: list[str],
+    ids_path: str | Path,
+    metadata_path: str | Path,
+    product_count: int,
+) -> None:
     index_path = Path(index_path)
     ids_path = Path(ids_path)
     metadata_path = Path(metadata_path)
@@ -136,7 +143,11 @@ def save_index(index: Any, index_path: str | Path, product_ids: list[str], ids_p
         np.save(_index_vector_path(index_path), vectors)
 
     np.save(ids_path, np.asarray(product_ids, dtype=object), allow_pickle=True)
-    metadata = {"product_count": int(product_count), "backend": "faiss" if faiss is not None and vectors is None else "numpy", "built_at": __import__("datetime").datetime.utcnow().isoformat()}
+    metadata = {
+        "product_count": int(product_count),
+        "backend": "faiss" if faiss is not None and vectors is None else "numpy",
+        "built_at": __import__("datetime").datetime.utcnow().isoformat(),
+    }
     metadata_path.write_text(json.dumps(metadata, indent=2), encoding="utf-8")
 
 
@@ -193,7 +204,11 @@ def should_rebuild_index(metadata_path: str | Path, current_count: int) -> bool:
 
 
 if __name__ == "__main__":
-    demo_vectors = [np.array([1.0] * FAISS_DIMENSION, dtype=np.float32), None, np.array([0.5] * FAISS_DIMENSION, dtype=np.float32)]
+    demo_vectors = [
+        np.array([1.0] * FAISS_DIMENSION, dtype=np.float32),
+        None,
+        np.array([0.5] * FAISS_DIMENSION, dtype=np.float32),
+    ]
     demo_ids = ["a", "b", "c"]
     try:
         collection = build_index_with_ids(demo_vectors, demo_ids)

@@ -1,0 +1,27 @@
+seed: 42
+
+data:
+  catalog_csv: "data/products.csv"
+  catalog_json: "data/products.json"
+  images_dir: "images"
+  index_dir: "index"
+  results_dir: "results"
+
+baseline_v1:
+  text_model_name: "all-MiniLM-L6-v2"
+  clip_model_name: "openai/clip-vit-base-patch32"
+  min_score_threshold: 0.15
+  top_k: 10
+  size_tolerance_ft: 1.5
+  weights:
+    metadata_size: 0.4
+    metadata_color: 0.3
+    metadata_style: 0.3
+    part1_meta: 0.5
+    part1_semantic: 0.5
+    fusion_mode_b_image: 0.6
+    fusion_mode_b_text: 0.4
+
+tracking:
+  experiment_name: "room2rug-multimodal"
+  tracking_uri: "file:./mlruns"

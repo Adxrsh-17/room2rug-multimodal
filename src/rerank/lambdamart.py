@@ -98,7 +98,11 @@ class LambdaMARTRanker(BaseRanker):
         """Return normalized feature importances based on split gain."""
         if not self.is_fitted:
             return {f: 0.0 for f in self.feature_names}
-        gains = self.model.booster_.feature_importance(importance_type="gain")
+        booster = getattr(self.model, "booster_", None) or getattr(self.model, "_Booster", None)
+        if booster is not None:
+            gains = booster.feature_importance(importance_type="gain")
+        else:
+            gains = self.model.booster_.feature_importance(importance_type="gain")
         total = sum(gains) if sum(gains) > 0 else 1.0
         return {name: round(float(g / total), 4) for name, g in zip(self.feature_names, gains)}
 
@@ -106,7 +110,9 @@ class LambdaMARTRanker(BaseRanker):
         """Compute exact TreeSHAP feature contributions using LightGBM native C++ engine."""
         if not self.is_fitted:
             return np.zeros((len(X), len(self.feature_names) + 1))
-        # predict with pred_contrib=True returns (N, num_features + 1 bias)
+        booster = getattr(self.model, "booster_", None) or getattr(self.model, "_Booster", None)
+        if booster is not None:
+            return booster.predict(X, pred_contrib=True)
         return self.model.booster_.predict(X, pred_contrib=True)
 
     def rank(
@@ -142,9 +148,13 @@ class LambdaMARTRanker(BaseRanker):
             feature_subset=self.feature_names,
         )
 
-        if self.is_fitted:
-            scores = self.model.predict(X)
+        booster = getattr(self.model, "booster_", None) or getattr(self.model, "_Booster", None)
+        if self.is_fitted and booster is not None:
+            scores = booster.predict(X)
             # Compute SHAP for explanations
+            shap_vals = self.get_shap_contributions(X)
+        elif self.is_fitted:
+            scores = self.model.predict(X)
             shap_vals = self.get_shap_contributions(X)
         else:
             # Fallback to stage1 score or simple heuristic
@@ -188,5 +198,6 @@ class LambdaMARTRanker(BaseRanker):
     def load(self, path: str | Path) -> None:
         booster = lgb.Booster(model_file=str(path))
         self.model._Booster = booster
+        self.booster = booster
         self.is_fitted = True
         logger.info("Loaded LambdaMART model from %s", path)

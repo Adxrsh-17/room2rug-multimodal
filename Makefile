@@ -33,6 +33,18 @@ train-reranker:
 eval-explanations:
 	$(PYTHON) scripts/evaluate_explanations.py
 
+serve:
+	$(PYTHON) -m uvicorn src.service.api:app --host 0.0.0.0 --port 8000
+
+benchmark-faiss:
+	$(PYTHON) scripts/benchmark_faiss.py
+
+profile-latency:
+	$(PYTHON) scripts/profile_latency.py
+
+load-test:
+	$(PYTHON) scripts/run_load_test.py
+
 ablate:
 	$(PYTHON) scripts/run_ablations.py
 

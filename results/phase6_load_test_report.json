@@ -1,0 +1,58 @@
+{
+  "benchmark_environment": "CPU Laptop (Local Thread Pool Concurrency)",
+  "pipeline_mode": "Two-Stage (Hybrid Stage 1 -> LambdaMART Stage 2 -> Grounded Explanations)",
+  "tiers": [
+    {
+      "concurrency_level": 1,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "error_count": 0,
+      "error_rate_pct": 0.0,
+      "throughput_rps": 0.09,
+      "latency_p50_ms": 11164.99,
+      "latency_p90_ms": 11520.39,
+      "latency_p95_ms": 11993.07,
+      "latency_p99_ms": 13263.2,
+      "wall_time_seconds": 449.2
+    },
+    {
+      "concurrency_level": 5,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "error_count": 0,
+      "error_rate_pct": 0.0,
+      "throughput_rps": 0.3,
+      "latency_p50_ms": 15724.62,
+      "latency_p90_ms": 22325.16,
+      "latency_p95_ms": 23202.24,
+      "latency_p99_ms": 24292.44,
+      "wall_time_seconds": 134.29
+    },
+    {
+      "concurrency_level": 10,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "error_count": 0,
+      "error_rate_pct": 0.0,
+      "throughput_rps": 0.14,
+      "latency_p50_ms": 27958.3,
+      "latency_p90_ms": 199882.78,
+      "latency_p95_ms": 202607.09,
+      "latency_p99_ms": 205209.62,
+      "wall_time_seconds": 288.45
+    },
+    {
+      "concurrency_level": 20,
+      "total_requests": 40,
+      "successful_requests": 40,
+      "error_count": 0,
+      "error_rate_pct": 0.0,
+      "throughput_rps": 0.13,
+      "latency_p50_ms": 55542.41,
+      "latency_p90_ms": 246404.01,
+      "latency_p95_ms": 248563.32,
+      "latency_p99_ms": 248879.82,
+      "wall_time_seconds": 305.48
+    }
+  ]
+}

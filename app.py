@@ -8,11 +8,14 @@ through its own internal WebSocket/asset pipeline. This bypasses:
 """
 from __future__ import annotations
 
+import base64
+import os
 import sys
 import time
 from io import BytesIO
 from pathlib import Path
 
+import requests
 import streamlit as st
 
 ROOT = Path(__file__).parent
@@ -382,18 +385,61 @@ with tab2:
             st.markdown('<div class="bwarn">⚠️ Please provide an image or text query.</div>',
                         unsafe_allow_html=True)
         else:
-            from src.search_part2 import search_multimodal
-            with st.spinner("🧠 Running CLIP + FAISS… (first run builds index ~30 s)"):
+            api_url = os.getenv("API_BASE_URL", "http://localhost:8000")
+            api_mode_used = False
+            res2 = []
+            el2 = 0.0
+
+            with st.spinner("🧠 Querying Search Engine (FastAPI Two-Stage / Local CLIP)..."):
                 t0 = time.time()
+                # 1. Attempt calling production FastAPI endpoint
                 try:
-                    res2 = search_multimodal(ii, text_query=ti, top_k=top_k,
-                                             csv_path=ROOT / "data" / "products.csv",
-                                             include_explanations=incl_ex)
-                    el2 = time.time() - t0
-                except RuntimeError as e:
-                    st.error(f"CLIP unavailable: {e}")
-                    res2 = []
-                    el2 = 0.0
+                    payload = {
+                        "text_query": ti,
+                        "top_k": top_k,
+                        "mode": "two_stage",
+                        "explain": incl_ex,
+                    }
+                    if ii is not None:
+                        buf = BytesIO()
+                        ii.save(buf, format="JPEG")
+                        payload["room_image_b64"] = base64.b64encode(buf.getvalue()).decode("utf-8")
+
+                    resp = requests.post(f"{api_url}/search", json=payload, timeout=5.0)
+                    if resp.status_code == 200:
+                        data = resp.json()
+                        api_mode_used = True
+                        res2 = [
+                            {
+                                "rank": c["final_rank"],
+                                "handle": c["handle"],
+                                "title": c["title"],
+                                "price": c["price"],
+                                "image_url": c["image_url"],
+                                "fusion_score": c["score"],
+                                "image_similarity": 0.85 if c.get("cielab_delta_e") else 0.5,
+                                "text_similarity": c["score"],
+                                "explanation": c.get("explanation", ""),
+                                "mode": f"FastAPI [{data.get('mode', 'two_stage')}]",
+                            }
+                            for c in data.get("candidates", [])
+                        ]
+                        el2 = data.get("latency_breakdown_ms", {}).get("total_latency_ms", 0.0) / 1000.0
+                except Exception:
+                    api_mode_used = False
+
+                # 2. Fallback to in-process execution if FastAPI is offline
+                if not api_mode_used:
+                    from src.search_part2 import search_multimodal
+                    try:
+                        res2 = search_multimodal(ii, text_query=ti, top_k=top_k,
+                                                 csv_path=ROOT / "data" / "products.csv",
+                                                 include_explanations=incl_ex)
+                        el2 = time.time() - t0
+                    except RuntimeError as e:
+                        st.error(f"CLIP unavailable: {e}")
+                        res2 = []
+                        el2 = 0.0
 
             if not res2:
                 st.markdown('<div class="bwarn">⚠️ No results found.</div>', unsafe_allow_html=True)

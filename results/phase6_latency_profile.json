@@ -1,0 +1,32 @@
+{
+  "end_to_end_latency_breakdown": {
+    "baseline_v1_median_breakdown": {
+      "parsing_ms": 0.02,
+      "retrieval_ms": 146.67,
+      "reranking_ms": 0.0,
+      "explanation_ms": 53.95,
+      "total_latency_ms": 199.93
+    },
+    "two_stage_median_breakdown": {
+      "parsing_ms": 0.02,
+      "retrieval_ms": 144.25,
+      "reranking_ms": 11052.24,
+      "explanation_ms": 60.34,
+      "total_latency_ms": 11229.65
+    }
+  },
+  "quantization_and_compression": {
+    "model_name": "sentence-transformers/all-MiniLM-L6-v2",
+    "fp32": {
+      "median_latency_ms": 8.69,
+      "model_size_mb": 86.68
+    },
+    "int8_dynamic": {
+      "median_latency_ms": 11.01,
+      "model_size_mb": 55.91,
+      "speedup": 0.79,
+      "size_reduction_pct": 35.5,
+      "cosine_similarity_preservation": 0.94934
+    }
+  }
+}

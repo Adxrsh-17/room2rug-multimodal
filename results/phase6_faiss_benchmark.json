@@ -1,0 +1,134 @@
+{
+  "n_68": {
+    "scale_name": "Real Catalog (ABO Subset)",
+    "vector_count": 68,
+    "dimension": 512,
+    "is_synthetic": false,
+    "topologies": [
+      {
+        "index_name": "IndexFlatIP (Exact Brute-Force)",
+        "n_vectors": 68,
+        "dimension": 512,
+        "build_time_s": 0.0001,
+        "memory_mb": 0.133,
+        "latency_mean_ms": 0.017,
+        "latency_p50_ms": 0.016,
+        "latency_p95_ms": 0.019,
+        "latency_p99_ms": 0.086,
+        "recall_at_10": 1.0
+      },
+      {
+        "index_name": "IndexIVFFlat (nlist=8, nprobe=4)",
+        "n_vectors": 68,
+        "dimension": 512,
+        "build_time_s": 0.0039,
+        "memory_mb": 0.149,
+        "latency_mean_ms": 0.03,
+        "latency_p50_ms": 0.025,
+        "latency_p95_ms": 0.059,
+        "latency_p99_ms": 0.187,
+        "recall_at_10": 0.725
+      },
+      {
+        "index_name": "IndexHNSWFlat (M=32, efSearch=64)",
+        "n_vectors": 68,
+        "dimension": 512,
+        "build_time_s": 0.0053,
+        "memory_mb": 0.151,
+        "latency_mean_ms": 0.165,
+        "latency_p50_ms": 0.077,
+        "latency_p95_ms": 0.259,
+        "latency_p99_ms": 3.982,
+        "recall_at_10": 1.0
+      }
+    ]
+  },
+  "n_10000": {
+    "scale_name": "Synthetic Scale (10k Items)",
+    "vector_count": 10000,
+    "dimension": 512,
+    "is_synthetic": true,
+    "topologies": [
+      {
+        "index_name": "IndexFlatIP (Exact Brute-Force)",
+        "n_vectors": 10000,
+        "dimension": 512,
+        "build_time_s": 0.0064,
+        "memory_mb": 19.531,
+        "latency_mean_ms": 1.481,
+        "latency_p50_ms": 1.423,
+        "latency_p95_ms": 1.774,
+        "latency_p99_ms": 1.866,
+        "recall_at_10": 1.0
+      },
+      {
+        "index_name": "IndexIVFFlat (nlist=64, nprobe=16)",
+        "n_vectors": 10000,
+        "dimension": 512,
+        "build_time_s": 0.1799,
+        "memory_mb": 19.733,
+        "latency_mean_ms": 0.462,
+        "latency_p50_ms": 0.457,
+        "latency_p95_ms": 0.51,
+        "latency_p99_ms": 0.541,
+        "recall_at_10": 0.434
+      },
+      {
+        "index_name": "IndexHNSWFlat (M=32, efSearch=64)",
+        "n_vectors": 10000,
+        "dimension": 512,
+        "build_time_s": 1.5691,
+        "memory_mb": 22.123,
+        "latency_mean_ms": 1.176,
+        "latency_p50_ms": 1.037,
+        "latency_p95_ms": 2.334,
+        "latency_p99_ms": 3.23,
+        "recall_at_10": 0.564
+      }
+    ]
+  },
+  "n_100000": {
+    "scale_name": "Synthetic Scale (100k Items)",
+    "vector_count": 100000,
+    "dimension": 512,
+    "is_synthetic": true,
+    "topologies": [
+      {
+        "index_name": "IndexFlatIP (Exact Brute-Force)",
+        "n_vectors": 100000,
+        "dimension": 512,
+        "build_time_s": 0.0592,
+        "memory_mb": 195.313,
+        "latency_mean_ms": 13.46,
+        "latency_p50_ms": 12.891,
+        "latency_p95_ms": 18.106,
+        "latency_p99_ms": 23.711,
+        "recall_at_10": 1.0
+      },
+      {
+        "index_name": "IndexIVFFlat (nlist=256, nprobe=32)",
+        "n_vectors": 100000,
+        "dimension": 512,
+        "build_time_s": 1.7618,
+        "memory_mb": 196.578,
+        "latency_mean_ms": 2.464,
+        "latency_p50_ms": 2.271,
+        "latency_p95_ms": 3.709,
+        "latency_p99_ms": 4.037,
+        "recall_at_10": 0.261
+      },
+      {
+        "index_name": "IndexHNSWFlat (M=32, efSearch=64)",
+        "n_vectors": 100000,
+        "dimension": 512,
+        "build_time_s": 31.2645,
+        "memory_mb": 221.272,
+        "latency_mean_ms": 1.834,
+        "latency_p50_ms": 1.678,
+        "latency_p95_ms": 3.063,
+        "latency_p99_ms": 5.233,
+        "recall_at_10": 0.115
+      }
+    ]
+  }
+}

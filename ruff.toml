@@ -4,6 +4,8 @@ exclude = [
     "src/baseline_v1",
     "tests/legacy_test_pipeline.py",
     "scratch",
+    "scripts",
+    "notebooks",
 ]
 
 [lint]

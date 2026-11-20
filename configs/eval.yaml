@@ -1,0 +1,30 @@
+# Evaluation Harness Configuration
+experiment_name: "phase_2_evaluation_harness"
+seed: 42
+
+data:
+  queries_path: "data/test_queries.json"
+  gold_labels_path: "data/gold_labels.json"
+  catalog_path: "data/products.json"
+
+evaluation:
+  k_values: [1, 3, 5, 10]
+  rel_threshold: 1.0
+  n_bootstraps: 1000
+  ci_level: 0.95
+  n_permutations: 2000
+
+baselines:
+  - name: "attribute_filter"
+  - name: "bm25"
+  - name: "minilm_dense"
+    model_name: "all-MiniLM-L6-v2"
+  - name: "clip_zero_shot"
+    model_name: "openai/clip-vit-base-patch32"
+  - name: "baseline_v1"
+  - name: "siglip"
+    model_name: "google/siglip-base-patch16-224"
+
+output:
+  results_json: "results/baseline_leaderboard.json"
+  results_markdown: "results/baseline_leaderboard.md"

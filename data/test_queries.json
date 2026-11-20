@@ -1,0 +1,817 @@
+[
+  {
+    "query_id": "test_q01_living_warm_neutral",
+    "room_image_path": "images/room1.jpg",
+    "text_query": "8x10 warm beige neutral living room rug",
+    "scene_type": "living_room",
+    "target_color": "beige",
+    "target_style": "contemporary",
+    "target_size": "8x10",
+    "candidate_rug_ids": [
+      "plc-10307-beige",
+      "plc-10305-grey",
+      "ultrg-0003c-beige",
+      "sureg-0001c-beige",
+      "strad-str07-beige",
+      "plc-10310-beige",
+      "myers-myp18-beige",
+      "myers-myp01-beige",
+      "plc-10308-beige",
+      "myers-myp10-beige",
+      "myers-myp11-beige",
+      "comfg-0002c-beige",
+      "mon-697j6-beige",
+      "plc-10301-beige"
+    ],
+    "provenance": {
+      "comfg-0002c-beige": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "mon-697j6-beige": [
+        "attribute_filter"
+      ],
+      "myers-myp01-beige": [
+        "attribute_filter",
+        "bm25",
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp10-beige": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "myers-myp11-beige": [
+        "attribute_filter",
+        "bm25",
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp18-beige": [
+        "attribute_filter",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "sureg-0001c-beige": [
+        "bm25"
+      ],
+      "ultrg-0003c-beige": [
+        "bm25"
+      ],
+      "plc-10307-beige": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10308-beige": [
+        "minilm_dense"
+      ],
+      "plc-10301-beige": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10310-beige": [
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "plc-10305-grey": [
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "strad-str07-beige": [
+        "clip_zero_shot",
+        "siglip"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q02_bedroom_serene_blue",
+    "room_image_path": "images/room2.JPG",
+    "text_query": "5x7 muted blue soft bedroom rug",
+    "scene_type": "bedroom",
+    "target_color": "blue",
+    "target_style": "modern",
+    "target_size": "5x7",
+    "candidate_rug_ids": [
+      "myers-myp04-blue",
+      "mei-2598v-blue",
+      "myers-myp12-grey",
+      "strad-str03-blue",
+      "strad-str02-brown",
+      "strad-str08-blue",
+      "plc-10309-grey",
+      "plc-10311-blue",
+      "myers-myp10-beige",
+      "plc-10305-grey",
+      "myers-myp02-blue",
+      "mei-1506l-blue",
+      "mei-4295b-blue",
+      "mei-1295r-red",
+      "strad-str04-multi",
+      "strad-str09-gold",
+      "mei-5701b-blue",
+      "strad-str01-gold"
+    ],
+    "provenance": {
+      "plc-10311-blue": [
+        "attribute_filter",
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "strad-str01-gold": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "strad-str03-blue": [
+        "attribute_filter",
+        "bm25",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str08-blue": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "strad-str09-gold": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "mei-1295r-red": [
+        "attribute_filter"
+      ],
+      "strad-str02-brown": [
+        "bm25"
+      ],
+      "strad-str04-multi": [
+        "bm25"
+      ],
+      "myers-myp04-blue": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "mei-5701b-blue": [
+        "minilm_dense"
+      ],
+      "mei-4295b-blue": [
+        "minilm_dense"
+      ],
+      "mei-1506l-blue": [
+        "minilm_dense"
+      ],
+      "mei-2598v-blue": [
+        "minilm_dense"
+      ],
+      "myers-myp12-grey": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10305-grey": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "plc-10309-grey": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp10-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp02-blue": [
+        "baseline_v1"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q03_dining_traditional",
+    "room_image_path": "images/room3.jpg",
+    "text_query": "8x10 traditional vintage oriental dining room rug",
+    "scene_type": "dining_room",
+    "target_color": "red",
+    "target_style": "traditional",
+    "target_size": "8x10",
+    "candidate_rug_ids": [
+      "myers-myp03-rust",
+      "plc-10305-grey",
+      "plc-10309-grey",
+      "plc-10301-beige",
+      "plc-10308-beige",
+      "myers-myp01-beige",
+      "plc-10311-blue",
+      "myers-myp02-blue",
+      "plc-10307-beige",
+      "mei-2808g-blue",
+      "myers-myp04-blue",
+      "plc-10310-beige",
+      "plc-10306-red",
+      "plc-10302-brown"
+    ],
+    "provenance": {
+      "myers-myp01-beige": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "myers-myp04-blue": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "mei-2808g-blue": [
+        "attribute_filter"
+      ],
+      "myers-myp02-blue": [
+        "attribute_filter"
+      ],
+      "myers-myp03-rust": [
+        "attribute_filter"
+      ],
+      "plc-10301-beige": [
+        "attribute_filter",
+        "bm25",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10302-brown": [
+        "bm25",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10305-grey": [
+        "bm25",
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10306-red": [
+        "bm25",
+        "minilm_dense"
+      ],
+      "plc-10311-blue": [
+        "minilm_dense"
+      ],
+      "plc-10308-beige": [
+        "minilm_dense"
+      ],
+      "plc-10309-grey": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10310-beige": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10307-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q04_office_geometric",
+    "room_image_path": "images/room4.jpg",
+    "text_query": "modern minimalist geometric home office rug",
+    "scene_type": "home_office",
+    "target_color": "grey",
+    "target_style": "geometric",
+    "target_size": "5x7",
+    "candidate_rug_ids": [
+      "plc-10301-beige",
+      "mai-6025l-grey",
+      "mai-5929j-tan",
+      "strad-str02-brown",
+      "strad-str09-gold",
+      "strad-str10-gold",
+      "strad-str07-beige",
+      "mei-2205b-navy",
+      "mei-7420a-blue",
+      "plc-10309-grey",
+      "mai-5929k-black",
+      "mei-2598r-red",
+      "myers-myp18-beige",
+      "plc-10302-brown",
+      "mai-5929b-navy",
+      "mai-5927b-ivory",
+      "plc-10307-beige",
+      "plc-10306-red",
+      "mai-5929e-grey",
+      "strad-str06-charcoal",
+      "strad-str04-multi",
+      "mei-9754r-red",
+      "plc-10305-grey"
+    ],
+    "provenance": {
+      "mai-5927b-ivory": [
+        "attribute_filter"
+      ],
+      "mai-5929b-navy": [
+        "attribute_filter"
+      ],
+      "mai-5929e-grey": [
+        "attribute_filter"
+      ],
+      "mai-5929j-tan": [
+        "attribute_filter"
+      ],
+      "mai-5929k-black": [
+        "attribute_filter"
+      ],
+      "mai-6025l-grey": [
+        "attribute_filter"
+      ],
+      "plc-10301-beige": [
+        "bm25"
+      ],
+      "plc-10302-brown": [
+        "bm25"
+      ],
+      "plc-10305-grey": [
+        "bm25"
+      ],
+      "plc-10306-red": [
+        "bm25"
+      ],
+      "plc-10307-beige": [
+        "bm25"
+      ],
+      "plc-10309-grey": [
+        "bm25"
+      ],
+      "mei-2205b-navy": [
+        "minilm_dense"
+      ],
+      "mei-9754r-red": [
+        "minilm_dense"
+      ],
+      "mei-2598r-red": [
+        "minilm_dense"
+      ],
+      "strad-str04-multi": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "mei-7420a-blue": [
+        "minilm_dense"
+      ],
+      "strad-str09-gold": [
+        "minilm_dense"
+      ],
+      "strad-str02-brown": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str07-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp18-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str10-gold": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str06-charcoal": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q05_living_boho_abstract",
+    "room_image_path": "images/room5.JPG",
+    "text_query": "bohemian abstract colorful area rug for living room",
+    "scene_type": "living_room",
+    "target_color": "terracotta",
+    "target_style": "boho",
+    "target_size": "8x10",
+    "candidate_rug_ids": [
+      "plc-10308-beige",
+      "plc-10309-grey",
+      "mon-697j6-beige",
+      "myers-myp12-grey",
+      "strad-str04-multi",
+      "myers-myp18-beige",
+      "sureg-0001c-beige",
+      "plc-10311-blue",
+      "myers-myp02-blue",
+      "myers-myp11-beige",
+      "mai-7763k-black",
+      "comfg-0002c-beige",
+      "myers-myp10-beige",
+      "myers-myp09-yellow",
+      "mai-7765y-tan",
+      "myers-myp01-beige",
+      "plc-10302-brown",
+      "ultrg-0003c-beige",
+      "strad-str02-brown",
+      "gripmax-0004e-grey",
+      "myers-myp04-blue",
+      "luxeh-0005e-grey"
+    ],
+    "provenance": {
+      "comfg-0002c-beige": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "gripmax-0004e-grey": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "luxeh-0005e-grey": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "mon-697j6-beige": [
+        "attribute_filter",
+        "baseline_v1"
+      ],
+      "myers-myp01-beige": [
+        "attribute_filter"
+      ],
+      "myers-myp02-blue": [
+        "attribute_filter"
+      ],
+      "sureg-0001c-beige": [
+        "bm25"
+      ],
+      "ultrg-0003c-beige": [
+        "bm25"
+      ],
+      "myers-myp09-yellow": [
+        "bm25",
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "mai-7765y-tan": [
+        "minilm_dense"
+      ],
+      "plc-10311-blue": [
+        "minilm_dense"
+      ],
+      "mai-7763k-black": [
+        "minilm_dense"
+      ],
+      "myers-myp04-blue": [
+        "minilm_dense"
+      ],
+      "plc-10308-beige": [
+        "minilm_dense"
+      ],
+      "strad-str04-multi": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "plc-10309-grey": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "plc-10302-brown": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp18-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str02-brown": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp11-beige": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp10-beige": [
+        "baseline_v1"
+      ],
+      "myers-myp12-grey": [
+        "baseline_v1"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q06_bedroom_plush_ivory",
+    "room_image_path": "images/room1.jpg",
+    "text_query": "plush ivory cozy minimalist bedroom carpet",
+    "scene_type": "bedroom",
+    "target_color": "ivory",
+    "target_style": "minimalist",
+    "target_size": "8x10",
+    "candidate_rug_ids": [
+      "mai-5929j-tan",
+      "mai-7764j-tan",
+      "mai-5929b-navy",
+      "plc-10307-beige",
+      "mai-7763k-black",
+      "mai-7764e-grey",
+      "plc-10305-grey",
+      "strad-str07-beige",
+      "mai-5927b-ivory",
+      "plc-10301-beige",
+      "luxeh-0005e-grey",
+      "plc-10308-beige",
+      "mai-5929k-black",
+      "mai-6025l-grey",
+      "mai-7765y-tan",
+      "myers-myp11-beige",
+      "myers-myp18-beige",
+      "mai-5929e-grey",
+      "plc-10310-beige"
+    ],
+    "provenance": {
+      "mai-5927b-ivory": [
+        "attribute_filter",
+        "bm25",
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "mai-5929b-navy": [
+        "attribute_filter"
+      ],
+      "mai-5929e-grey": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "mai-5929j-tan": [
+        "attribute_filter",
+        "bm25",
+        "baseline_v1"
+      ],
+      "mai-5929k-black": [
+        "attribute_filter"
+      ],
+      "mai-6025l-grey": [
+        "attribute_filter",
+        "bm25",
+        "baseline_v1"
+      ],
+      "luxeh-0005e-grey": [
+        "bm25"
+      ],
+      "mai-7763k-black": [
+        "bm25"
+      ],
+      "plc-10308-beige": [
+        "minilm_dense"
+      ],
+      "mai-7765y-tan": [
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "plc-10301-beige": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "plc-10310-beige": [
+        "minilm_dense"
+      ],
+      "plc-10307-beige": [
+        "minilm_dense",
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp18-beige": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp11-beige": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "strad-str07-beige": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "plc-10305-grey": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "mai-7764j-tan": [
+        "baseline_v1"
+      ],
+      "mai-7764e-grey": [
+        "baseline_v1"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q07_dining_contemporary_navy",
+    "room_image_path": "images/room3.jpg",
+    "text_query": "contemporary navy blue low pile dining area rug",
+    "scene_type": "dining_room",
+    "target_color": "navy",
+    "target_style": "contemporary",
+    "target_size": "8x10",
+    "candidate_rug_ids": [
+      "mei-2205b-navy",
+      "mei-9650b-navy",
+      "mei-7541b-navy",
+      "plc-10311-blue",
+      "myers-myp09-yellow",
+      "strad-str08-blue",
+      "myers-myp10-beige",
+      "myers-myp12-grey",
+      "myers-myp11-beige",
+      "strad-str01-gold",
+      "mei-2209b-navy",
+      "mai-7765b-navy",
+      "mai-5929b-navy",
+      "mei-5703b-navy",
+      "mei-1634q-navy",
+      "strad-str03-blue",
+      "mei-4295b-blue",
+      "myers-myp04-blue"
+    ],
+    "provenance": {
+      "myers-myp09-yellow": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "myers-myp10-beige": [
+        "attribute_filter",
+        "bm25",
+        "baseline_v1"
+      ],
+      "myers-myp12-grey": [
+        "attribute_filter",
+        "bm25",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str01-gold": [
+        "attribute_filter"
+      ],
+      "strad-str03-blue": [
+        "attribute_filter",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str08-blue": [
+        "attribute_filter",
+        "baseline_v1"
+      ],
+      "myers-myp11-beige": [
+        "bm25"
+      ],
+      "mei-7541b-navy": [
+        "bm25",
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "mei-1634q-navy": [
+        "bm25"
+      ],
+      "plc-10311-blue": [
+        "minilm_dense"
+      ],
+      "mei-4295b-blue": [
+        "minilm_dense"
+      ],
+      "mei-5703b-navy": [
+        "minilm_dense"
+      ],
+      "mei-2209b-navy": [
+        "minilm_dense"
+      ],
+      "mei-9650b-navy": [
+        "minilm_dense"
+      ],
+      "mai-5929b-navy": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "mai-7765b-navy": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "mei-2205b-navy": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp04-blue": [
+        "clip_zero_shot",
+        "siglip"
+      ]
+    }
+  },
+  {
+    "query_id": "test_q08_office_neutral_clean",
+    "room_image_path": "images/room4.jpg",
+    "text_query": "clean durable grey workspace rug for office desk",
+    "scene_type": "home_office",
+    "target_color": "grey",
+    "target_style": "modern",
+    "target_size": "5x7",
+    "candidate_rug_ids": [
+      "mai-6025l-grey",
+      "myers-myp19-grey",
+      "mai-5929e-grey",
+      "myers-myp17-grey",
+      "mai-5929b-navy",
+      "plc-10309-grey",
+      "myers-myp12-grey",
+      "gripmax-0004e-grey",
+      "strad-str06-charcoal",
+      "myers-myp18-beige",
+      "plc-10305-grey",
+      "mai-7764e-grey",
+      "luxeh-0005e-grey"
+    ],
+    "provenance": {
+      "gripmax-0004e-grey": [
+        "attribute_filter",
+        "bm25"
+      ],
+      "luxeh-0005e-grey": [
+        "attribute_filter",
+        "bm25",
+        "minilm_dense",
+        "baseline_v1"
+      ],
+      "mai-5929b-navy": [
+        "attribute_filter"
+      ],
+      "mai-5929e-grey": [
+        "attribute_filter",
+        "minilm_dense"
+      ],
+      "mai-6025l-grey": [
+        "attribute_filter",
+        "minilm_dense"
+      ],
+      "mai-7764e-grey": [
+        "attribute_filter",
+        "minilm_dense"
+      ],
+      "plc-10305-grey": [
+        "bm25",
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "plc-10309-grey": [
+        "bm25",
+        "minilm_dense",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp12-grey": [
+        "bm25",
+        "baseline_v1"
+      ],
+      "myers-myp17-grey": [
+        "bm25",
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "myers-myp19-grey": [
+        "clip_zero_shot",
+        "baseline_v1",
+        "siglip"
+      ],
+      "strad-str06-charcoal": [
+        "clip_zero_shot",
+        "siglip"
+      ],
+      "myers-myp18-beige": [
+        "clip_zero_shot",
+        "siglip"
+      ]
+    }
+  }
+]

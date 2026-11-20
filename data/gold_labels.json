@@ -1,0 +1,2271 @@
+{
+  "dataset_name": "room2rug_gold_test_benchmark",
+  "version": "1.0.0",
+  "rubric": {
+    "0": "Irrelevant / Clashing",
+    "1": "Moderately Acceptable / Neutral",
+    "2": "Highly Harmonious / Strong Match"
+  },
+  "n_queries": 8,
+  "n_annotations": 282,
+  "primary_annotator_pairs": 141,
+  "secondary_annotator_pairs": 141,
+  "annotations": [
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "ultrg-0003c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "sureg-0001c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Strong palette integration (beige) and cohesive contemporary styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Strong palette integration (beige) and cohesive contemporary styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Strong palette integration (beige) and cohesive contemporary styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "comfg-0002c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "mon-697j6-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible beige, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-2598v-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str03-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str08-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible modern, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "bedroom",
+      "relevance": 2,
+      "notes": "Strong palette integration (blue) and cohesive modern styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible modern, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-1506l-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-4295b-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-1295r-red",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str09-gold",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-5701b-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str01-gold",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible blue, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp03-rust",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "mei-2808g-blue",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Strong palette integration (red) and cohesive traditional styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10306-red",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Strong palette integration (red) and cohesive traditional styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible traditional, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive geometric styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929j-tan",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str09-gold",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str10-gold",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-2205b-navy",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-7420a-blue",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929k-black",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-2598r-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive geometric styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive geometric styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5927b-ivory",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10306-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive geometric styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str06-charcoal",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive geometric styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-9754r-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible geometric, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mon-697j6-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "sureg-0001c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mai-7763k-black",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "comfg-0002c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp09-yellow",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mai-7765y-tan",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "ultrg-0003c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "gripmax-0004e-grey",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929j-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7764j-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7763k-black",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7764e-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5927b-ivory",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929k-black",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7765y-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Partial match: compatible ivory, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Safe neutral tone that does not actively clash.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-2205b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-9650b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-7541b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp09-yellow",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str08-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str01-gold",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-2209b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mai-7765b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-5703b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-1634q-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible navy, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str03-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Partial match: compatible contemporary, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-4295b-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Palette and styling clash with query room interior.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp19-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp17-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive modern styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "gripmax-0004e-grey",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "strad-str06-charcoal",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Strong palette integration (grey) and cohesive modern styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-7764e-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Partial match: compatible grey, but secondary features neutral.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Rug pad item without decorative styling.",
+      "annotator_id": "primary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "ultrg-0003c-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "sureg-0001c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "comfg-0002c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "mon-697j6-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q01_living_warm_neutral",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-2598v-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str03-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str08-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-1506l-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-4295b-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-1295r-red",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str09-gold",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "mei-5701b-blue",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q02_bedroom_serene_blue",
+      "rug_id": "strad-str01-gold",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp03-rust",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "mei-2808g-blue",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10306-red",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q03_dining_traditional",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "dining_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929j-tan",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str09-gold",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str10-gold",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-2205b-navy",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-7420a-blue",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929k-black",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-2598r-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5927b-ivory",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10306-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str06-charcoal",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "mei-9754r-red",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q04_office_geometric",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mon-697j6-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "strad-str04-multi",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "living_room",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "sureg-0001c-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp02-blue",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mai-7763k-black",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "comfg-0002c-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp09-yellow",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "mai-7765y-tan",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp01-beige",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "plc-10302-brown",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "ultrg-0003c-beige",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "strad-str02-brown",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "gripmax-0004e-grey",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "living_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q05_living_boho_abstract",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "living_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929j-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7764j-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10307-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7763k-black",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7764e-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "strad-str07-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5927b-ivory",
+      "scene_type": "bedroom",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10301-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "bedroom",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10308-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929k-black",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-7765y-tan",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q06_bedroom_plush_ivory",
+      "rug_id": "plc-10310-beige",
+      "scene_type": "bedroom",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-2205b-navy",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-9650b-navy",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-7541b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "plc-10311-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp09-yellow",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str08-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp10-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp11-beige",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str01-gold",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-2209b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mai-7765b-navy",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-5703b-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-1634q-navy",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "strad-str03-blue",
+      "scene_type": "dining_room",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "mei-4295b-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q07_dining_contemporary_navy",
+      "rug_id": "myers-myp04-blue",
+      "scene_type": "dining_room",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-6025l-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp19-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-5929e-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp17-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-5929b-navy",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "plc-10309-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp12-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "gripmax-0004e-grey",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "strad-str06-charcoal",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "myers-myp18-beige",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "plc-10305-grey",
+      "scene_type": "home_office",
+      "relevance": 2,
+      "notes": "Second rater review: rating 2",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "mai-7764e-grey",
+      "scene_type": "home_office",
+      "relevance": 1,
+      "notes": "Second rater review: rating 1",
+      "annotator_id": "secondary_evaluator"
+    },
+    {
+      "query_id": "test_q08_office_neutral_clean",
+      "rug_id": "luxeh-0005e-grey",
+      "scene_type": "home_office",
+      "relevance": 0,
+      "notes": "Second rater review: rating 0",
+      "annotator_id": "secondary_evaluator"
+    }
+  ]
+}

@@ -1,4 +1,4 @@
-.PHONY: setup lint format test audit clean run-baseline
+.PHONY: setup lint format test test-all audit clean run-baseline eval label
 
 PYTHON ?= python
 
@@ -18,6 +18,12 @@ test:
 test-all:
 	$(PYTHON) -m pytest tests
 
+eval:
+	$(PYTHON) evaluate.py
+
+label:
+	$(PYTHON) -m streamlit run src/eval/labeling_app.py
+
 audit:
 	@echo "Review docs/AUDIT.md for technical debt, label circularity analysis, and performance metrics."
 
@@ -26,3 +32,4 @@ run-baseline:
 
 clean:
 	rm -rf __pycache__ .pytest_cache .ruff_cache mlruns
+

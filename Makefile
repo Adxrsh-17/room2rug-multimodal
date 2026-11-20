@@ -30,6 +30,9 @@ train-retrieval:
 train-reranker:
 	$(PYTHON) train_reranker.py
 
+eval-explanations:
+	$(PYTHON) scripts/evaluate_explanations.py
+
 ablate:
 	$(PYTHON) scripts/run_ablations.py
 

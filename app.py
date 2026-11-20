@@ -7,9 +7,12 @@ through its own internal WebSocket/asset pipeline. This bypasses:
   - Streamlit's HTML sanitizer stripping data: URIs from st.markdown()
 """
 from __future__ import annotations
-import sys, time
+
+import sys
+import time
 from io import BytesIO
 from pathlib import Path
+
 import streamlit as st
 
 ROOT = Path(__file__).parent

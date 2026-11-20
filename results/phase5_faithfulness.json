@@ -1,0 +1,51 @@
+{
+  "unconstrained_llm_baseline": {
+    "total_samples": 141,
+    "faithful_count": 41,
+    "contradiction_count": 100,
+    "hallucination_count": 0,
+    "faithfulness_rate": 0.2908,
+    "contradiction_rate": 0.7092,
+    "hallucination_rate": 0.0,
+    "mean_grounding_precision": 0.435,
+    "latency_ms_per_item": 0.003,
+    "estimated_cost_per_1k": "$1.50"
+  },
+  "grounded_constrained_llm": {
+    "total_samples": 141,
+    "faithful_count": 134,
+    "contradiction_count": 7,
+    "hallucination_count": 0,
+    "faithfulness_rate": 0.9504,
+    "contradiction_rate": 0.0496,
+    "hallucination_rate": 0.0,
+    "mean_grounding_precision": 0.9787,
+    "latency_ms_per_item": 1.64,
+    "estimated_cost_per_1k": "$1.50"
+  },
+  "production_pipeline_with_fallback": {
+    "total_samples": 141,
+    "faithful_count": 141,
+    "contradiction_count": 0,
+    "hallucination_count": 0,
+    "faithfulness_rate": 1.0,
+    "contradiction_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "mean_grounding_precision": 1.0,
+    "latency_ms_per_item": 5.485,
+    "fallback_rate": 0.0496,
+    "estimated_cost_per_1k": "$1.50"
+  },
+  "deterministic_grounded_generator": {
+    "total_samples": 141,
+    "faithful_count": 141,
+    "contradiction_count": 0,
+    "hallucination_count": 0,
+    "faithfulness_rate": 1.0,
+    "contradiction_rate": 0.0,
+    "hallucination_rate": 0.0,
+    "mean_grounding_precision": 1.0,
+    "latency_ms_per_item": 1.641,
+    "estimated_cost_per_1k": "$0.00"
+  }
+}

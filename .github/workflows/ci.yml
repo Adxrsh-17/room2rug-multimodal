@@ -30,7 +30,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
-          pip install ruff pytest pytest-cov pyyaml numpy pandas scikit-learn lightgbm faiss-cpu fastapi psutil rank-bm25 pillow requests transformers sentence-transformers
+          pip install ruff pytest pytest-cov pyyaml numpy pandas scikit-learn lightgbm faiss-cpu fastapi psutil rank-bm25 pillow requests transformers sentence-transformers sentencepiece uvicorn
 
       - name: Lint Code with Ruff
         run: |
@@ -42,8 +42,30 @@ jobs:
 
       - name: Run Unit & Leakage Tests
         run: |
-          python -m pytest tests/test_seed.py tests/test_config.py tests/test_leakage.py tests/test_baseline_v1_unit.py tests/test_metrics.py tests/test_cielab.py tests/test_explain.py tests/test_quality_gate.py -v
+          set -o pipefail
+          python -m pytest tests/test_seed.py tests/test_config.py tests/test_leakage.py tests/test_baseline_v1_unit.py tests/test_metrics.py tests/test_cielab.py tests/test_explain.py tests/test_quality_gate.py -v --tb=short 2>&1 | tee pytest.log
+
+      - name: Pytest Step Summary
+        if: always()
+        run: |
+          if [ -f pytest.log ]; then
+            echo "### Pytest Execution Summary" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat pytest.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi
 
       - name: Automated Quality Gate (Lineage, Regression & Latency)
         run: |
-          python scripts/ci_quality_gate.py
+          set -o pipefail
+          python scripts/ci_quality_gate.py 2>&1 | tee quality_gate.log
+
+      - name: Quality Gate Step Summary
+        if: always()
+        run: |
+          if [ -f quality_gate.log ]; then
+            echo "### Quality Gate Summary" >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+            cat quality_gate.log >> $GITHUB_STEP_SUMMARY
+            echo '```' >> $GITHUB_STEP_SUMMARY
+          fi

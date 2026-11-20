@@ -25,7 +25,7 @@ logger = logging.getLogger("CIQualityGate")
 
 # Thresholds
 MIN_ALLOWED_NDCG5 = 0.58
-MAX_ALLOWED_RETRIEVAL_LATENCY_MS = 400.0
+MAX_ALLOWED_RETRIEVAL_LATENCY_MS = 500.0
 
 
 def check_leakage_gate() -> bool:

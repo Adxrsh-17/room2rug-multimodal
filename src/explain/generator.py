@@ -96,9 +96,7 @@ class DeterministicGroundedGenerator:
                 f"Offered in the requested {matched_size} dimension, it aligns with {style_clause} and is {mat_clause}."
             )
         else:
-            sentences.append(
-                f"Its {style_clause} complements the interior aesthetic while being {mat_clause}."
-            )
+            sentences.append(f"Its {style_clause} complements the interior aesthetic while being {mat_clause}.")
 
         return " ".join(sentences)
 

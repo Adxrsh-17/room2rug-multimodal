@@ -32,9 +32,10 @@ A hybrid regex + rule-based parser extracts structured intent from free-text que
 
 **Dimensions** are extracted using a set of regex patterns:
 ```python
-r"(\d+\.?\d*)\s*[xX×]\s*(\d+\.?\d*)"   # classic: "8x10", "5 X 8"
-r"(\d+\.?\d*)\s+by\s+(\d+\.?\d*)"       # natural: "8 by 10"
-r"(\d+\.?\d*)\s*ft?\s*[xX×]\s*..."      # with units
+r"(\d+\.?\d*)\s*[xX×]\s*(\d+\.?\d*)"  # classic: "8x10", "5 X 8"
+
+r"(\d+\.?\d*)\s+by\s+(\d+\.?\d*)"  # natural: "8 by 10"
+r"(\d+\.?\d*)\s*ft?\s*[xX×]\s*..."  # with units
 ```
 Dimension values ≥ 30 are rejected (likely inches, not feet). Width and length are always sorted so `"10x8"` is treated identically to `"8x10"`.
 
@@ -85,6 +86,7 @@ Uses `openai/clip-vit-base-patch32` via HuggingFace Transformers. CLIP is the ri
 
 ```python
 from transformers import CLIPModel, CLIPProcessor
+
 model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
 processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
 ```

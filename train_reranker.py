@@ -336,11 +336,12 @@ def train_and_evaluate_reranker(
         f.write("|---|---|---|:---:|---|:---:|---|\n")
 
         for ec in error_cases[:4]:
-            mode = "Under-specified style / palette clash" if ec["top_retrieved_gold_rel"] == 0 else "Suboptimal ordering"
+            mode = (
+                "Under-specified style / palette clash" if ec["top_retrieved_gold_rel"] == 0 else "Suboptimal ordering"
+            )
             f.write(
                 f'| `{ec["query_id"]}` | `{ec["scene_type"]}` | *"{ec["text_query"]}"* | {ec["ndcg@5"]:.3f} | `{ec["top_retrieved_rug"]}` | {ec["top_retrieved_gold_rel"]} | {mode} |\n'
             )
-
 
         f.write("\n### Failure Mode Taxonomy & Mitigation Strategies\n\n")
         f.write(

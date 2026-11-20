@@ -32,7 +32,6 @@ def test_lambdamart_fit_predict_and_shap():
     assert feature_cols[0] in importances
     assert importances[feature_cols[0]] > 0.0
 
-
     # TreeSHAP contributions
     shap_vals = ranker.get_shap_contributions(X)
     assert shap_vals.shape == (8, 6)  # 5 features + 1 bias

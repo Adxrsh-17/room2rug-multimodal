@@ -128,9 +128,7 @@ class FaithfulnessValidator:
                 sizes.add(dim)
 
         is_rug_pad = (
-            "rug pad" in full_text
-            or str(product.get("style", "")).lower() == "rug pads"
-            or "padsecure" in full_text
+            "rug pad" in full_text or str(product.get("style", "")).lower() == "rug pads" or "padsecure" in full_text
         )
 
         return {
@@ -213,7 +211,7 @@ class FaithfulnessValidator:
                     contradictions.append(
                         f"Color contradiction: claims '{c}' for rug, but catalog color is {list(gt['colors'])}"
                     )
-                for m in (mentioned_colors & gt["colors"]):
+                for m in mentioned_colors & gt["colors"]:
                     verified_claims.append(f"Color: {m}")
 
         # 3. Size / Dimension verification
@@ -240,14 +238,10 @@ class FaithfulnessValidator:
             decorative_terms = ["plush", "luxurious", "decorative", "oriental", "vintage medallion", "cozy pile"]
             for term in decorative_terms:
                 if term in text_lower:
-                    contradictions.append(
-                        f"Product type contradiction: describes utilitarian rug pad with '{term}'"
-                    )
+                    contradictions.append(f"Product type contradiction: describes utilitarian rug pad with '{term}'")
 
         total_claims = len(verified_claims) + len(contradictions) + len(hallucinations)
-        grounding_precision = (
-            len(verified_claims) / total_claims if total_claims > 0 else 1.0
-        )
+        grounding_precision = len(verified_claims) / total_claims if total_claims > 0 else 1.0
         is_faithful = (len(contradictions) == 0) and (len(hallucinations) == 0)
 
         return FaithfulnessResult(

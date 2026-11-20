@@ -236,5 +236,4 @@ class RerankingFeatureExtractor:
             rows.append([feat_dict.get(col, 0.0) for col in feature_cols])
             rug_ids.append(cand.rug_id)
 
-
         return np.array(rows, dtype=np.float32), rug_ids

@@ -4,23 +4,23 @@
   "generated_at": "2026-11-20T17:30:00Z",
   "artifacts": {
     "data/products.json": {
-      "sha256": "bebd46c0500946e7fdab319dd10a3d7a0f95863a7c490da62d1f97ac0aeeff8e",
-      "size_bytes": 207976,
+      "sha256": "ade5b05007fa03fdb2b561194a58328f86ed6bb6a30b6e4991ebe47badaba3ca",
+      "size_bytes": 206455,
       "description": "Cleaned ABO rug catalog with normalized attributes"
     },
     "data/products.csv": {
-      "sha256": "1857715f99ac1b722e10e93769ca0fc4259e08e32d2ab06298424ab6488c509a",
-      "size_bytes": 298098,
+      "sha256": "f2cf2e1cd2cb29d6aab5d3fb363ea4bcf8a83d0a45708f9158c382ca38ce4d9a",
+      "size_bytes": 295847,
       "description": "Tabular format of cleaned catalog for fast pandas queries"
     },
     "data/gold_labels.json": {
-      "sha256": "1fcd08664600d496f21284b2dea815a84ff74ceb558e1339cfff7872d20c5ae9",
-      "size_bytes": 76234,
+      "sha256": "d06a4660f79d9b6a036843b0be0455c801acec4adfbd96ed61b0f92531240fe5",
+      "size_bytes": 73964,
       "description": "Human gold evaluation annotations (graded 0/1/2) collected via Streamlit"
     },
     "data/test_queries.json": {
-      "sha256": "41bd15358b3658c5dff654f94b00e9b149b2a411a73535ae5f9fe223f3463e32",
-      "size_bytes": 18609,
+      "sha256": "02fe70b7d5269e783aafffe0fa872c8e398490ff985cd24018619f074848391e",
+      "size_bytes": 17793,
       "description": "Held-out test split queries with pooled candidate candidate rug ids"
     },
     "models/retrieval_adapter.pt": {

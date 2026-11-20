@@ -35,6 +35,10 @@ def verify_lineage(manifest_path: str = "lineage.json") -> bool:
         with open(rel_path, "rb") as f:
             content = f.read()
 
+        # Normalize line endings for text artifacts to ensure cross-platform determinism
+        if rel_path.endswith((".json", ".csv", ".txt", ".yaml", ".yml")):
+            content = content.replace(b"\r\n", b"\n")
+
         computed_sha256 = hashlib.sha256(content).hexdigest()
         expected_sha256 = meta.get("sha256")
         expected_size = meta.get("size_bytes")

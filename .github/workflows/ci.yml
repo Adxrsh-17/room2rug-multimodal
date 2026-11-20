@@ -30,7 +30,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install torch --extra-index-url https://download.pytorch.org/whl/cpu
-          pip install ruff pytest pytest-cov pyyaml numpy pandas scikit-learn lightgbm faiss-cpu fastapi psutil rank-bm25 pillow requests transformers sentence-transformers sentencepiece uvicorn
+          pip install ruff pytest pytest-cov pyyaml numpy pandas scikit-learn lightgbm faiss-cpu fastapi psutil rank-bm25 pillow requests transformers sentence-transformers sentencepiece uvicorn beautifulsoup4 lxml
 
       - name: Lint Code with Ruff
         run: |
@@ -51,11 +51,8 @@ jobs:
           if [ -f pytest.log ]; then
             echo "### Pytest Execution Summary" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            cat pytest.log >> $GITHUB_STEP_SUMMARY
+            tail -n 35 pytest.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            while IFS= read -r line; do
-              echo "::error title=PytestLog::$line"
-            done < pytest.log
           fi
 
       - name: Automated Quality Gate (Lineage, Regression & Latency)
@@ -69,9 +66,6 @@ jobs:
           if [ -f quality_gate.log ]; then
             echo "### Quality Gate Summary" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            cat quality_gate.log >> $GITHUB_STEP_SUMMARY
+            tail -n 35 quality_gate.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            while IFS= read -r line; do
-              echo "::error title=QualityGateLog::$line"
-            done < quality_gate.log
           fi

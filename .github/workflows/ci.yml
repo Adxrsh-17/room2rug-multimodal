@@ -53,6 +53,9 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             cat pytest.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
+            while IFS= read -r line; do
+              echo "::error title=PytestLog::$line"
+            done < pytest.log
           fi
 
       - name: Automated Quality Gate (Lineage, Regression & Latency)
@@ -68,4 +71,7 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             cat quality_gate.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
+            while IFS= read -r line; do
+              echo "::error title=QualityGateLog::$line"
+            done < quality_gate.log
           fi

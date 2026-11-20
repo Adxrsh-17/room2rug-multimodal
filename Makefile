@@ -1,4 +1,4 @@
-.PHONY: setup lint format test test-all audit clean run-baseline eval label
+.PHONY: setup lint format test test-all audit clean run-baseline eval label train-retrieval ablate
 
 PYTHON ?= python
 
@@ -23,6 +23,13 @@ eval:
 
 label:
 	$(PYTHON) -m streamlit run src/eval/labeling_app.py
+
+train-retrieval:
+	$(PYTHON) train_retrieval.py
+
+ablate:
+	$(PYTHON) scripts/run_ablations.py
+
 
 audit:
 	@echo "Review docs/AUDIT.md for technical debt, label circularity analysis, and performance metrics."

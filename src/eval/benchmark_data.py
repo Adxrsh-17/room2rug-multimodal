@@ -186,7 +186,6 @@ def generate_benchmark_suite(
         for rid in pool["pooled_rug_ids"]:
             all_pooled_pairs.append((q.query_id, rid, q, cand_by_id[rid]))
 
-
     # Curate ground truth ratings following the human rubric:
     # 0: Irrelevant / Clashing
     # 1: Moderately Acceptable
@@ -294,6 +293,51 @@ def generate_benchmark_suite(
         "test_queries_path": output_queries_path,
         "gold_labels_path": output_gold_path,
     }
+
+
+def load_test_data(
+    queries_path: str = "data/test_queries.json",
+    gold_path: str = "data/gold_labels.json",
+    products_path: str = "data/products.json",
+) -> tuple[list[Query], list[CandidateRug], dict[str, dict[str, float]], dict[str, str], dict[str, Any]]:
+    """Loads benchmark queries, catalog candidates, and gold labels."""
+    if not Path(queries_path).exists() or not Path(gold_path).exists():
+        logger.info("Test queries or gold labels missing. Generating benchmark suite...")
+        generate_benchmark_suite(
+            products_path=products_path,
+            output_queries_path=queries_path,
+            output_gold_path=gold_path,
+        )
+
+    candidates = load_candidate_rugs(products_path)
+
+    with open(queries_path, "r", encoding="utf-8") as f:
+        q_data = json.load(f)
+
+    with open(gold_path, "r", encoding="utf-8") as f:
+        gold_raw = json.load(f)
+
+    queries: list[Query] = []
+    query_slices: dict[str, str] = {}
+    for item in q_data:
+        qid = item["query_id"]
+        queries.append(
+            Query(
+                query_id=qid,
+                room_image_path=item.get("room_image_path"),
+                text_query=item.get("text_query", ""),
+                scene_type=item.get("scene_type", "general"),
+                metadata=item,
+            )
+        )
+        query_slices[qid] = item.get("scene_type", "general")
+
+    primary_gold: dict[str, dict[str, float]] = {}
+    for ann in gold_raw.get("annotations", []):
+        if ann.get("annotator_id") == "primary_evaluator":
+            primary_gold.setdefault(ann["query_id"], {})[ann["rug_id"]] = float(ann["relevance"])
+
+    return queries, candidates, primary_gold, query_slices, gold_raw
 
 
 if __name__ == "__main__":

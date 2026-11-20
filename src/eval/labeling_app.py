@@ -81,7 +81,6 @@ def main():
         for rug_id in candidate_ids:
             tasks.append({"query": q, "rug_id": rug_id})
 
-
     if not tasks:
         st.info("No query-rug pairs to annotate.")
         return

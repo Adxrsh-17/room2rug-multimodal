@@ -1,0 +1,265 @@
+{
+  "ablations": [
+    {
+      "system_name": "clip_zero_shot",
+      "ndcg@5": {
+        "mean": 0.6536,
+        "ci_95": [
+          0.4928,
+          0.8235
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.65,
+        "ci_95": [
+          0.5462,
+          0.7441
+        ]
+      },
+      "recall@5": {
+        "mean": 0.3334,
+        "ci_95": [
+          0.2763,
+          0.3907
+        ]
+      },
+      "mrr@10": 0.9375,
+      "p_val_vs_v1_ndcg@5": 0.2545,
+      "experiment_group": "1. Architecture & Model Type",
+      "variant": "Frozen Zero-Shot CLIP (ViT-B/32)",
+      "notes": "Zero-shot baseline without domain adaptation."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.3232,
+        "ci_95": [
+          0.1458,
+          0.5028
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.4017,
+        "ci_95": [
+          0.2018,
+          0.5877
+        ]
+      },
+      "recall@5": {
+        "mean": 0.1721,
+        "ci_95": [
+          0.0757,
+          0.272
+        ]
+      },
+      "mrr@10": 0.497,
+      "p_val_vs_v1_ndcg@5": 0.008,
+      "experiment_group": "2. Negative Mining",
+      "variant": "Residual Adapter (In-Batch Negatives Only)",
+      "notes": "Random batch negatives only; struggles with hard decorative vs utility distinctions."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.3294,
+        "ci_95": [
+          0.1318,
+          0.5291
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.4036,
+        "ci_95": [
+          0.193,
+          0.5944
+        ]
+      },
+      "recall@5": {
+        "mean": 0.1712,
+        "ci_95": [
+          0.0724,
+          0.2778
+        ]
+      },
+      "mrr@10": 0.4417,
+      "p_val_vs_v1_ndcg@5": 0.008,
+      "experiment_group": "1. Architecture & Model Type",
+      "variant": "Trained Residual Adapter (In-Batch + Hard Negs)",
+      "notes": "Domain-adapted 2-layer residual projection head."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.0955,
+        "ci_95": [
+          0.0,
+          0.2233
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.1113,
+        "ci_95": [
+          0.0188,
+          0.2235
+        ]
+      },
+      "recall@5": {
+        "mean": 0.0429,
+        "ci_95": [
+          0.0,
+          0.097
+        ]
+      },
+      "mrr@10": 0.2482,
+      "p_val_vs_v1_ndcg@5": 0.008,
+      "experiment_group": "3. Training Data Volume Curve",
+      "variant": "Adapter trained on 25% Training Pairs",
+      "notes": "Ablating sample efficiency at 25% Training Pairs volume."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.1437,
+        "ci_95": [
+          0.0109,
+          0.3244
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.2001,
+        "ci_95": [
+          0.0686,
+          0.3709
+        ]
+      },
+      "recall@5": {
+        "mean": 0.052,
+        "ci_95": [
+          0.0114,
+          0.102
+        ]
+      },
+      "mrr@10": 0.2731,
+      "p_val_vs_v1_ndcg@5": 0.008,
+      "experiment_group": "3. Training Data Volume Curve",
+      "variant": "Adapter trained on 50% Training Pairs",
+      "notes": "Ablating sample efficiency at 50% Training Pairs volume."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.3341,
+        "ci_95": [
+          0.1744,
+          0.4725
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.4438,
+        "ci_95": [
+          0.2536,
+          0.6089
+        ]
+      },
+      "recall@5": {
+        "mean": 0.1808,
+        "ci_95": [
+          0.0833,
+          0.2892
+        ]
+      },
+      "mrr@10": 0.6389,
+      "p_val_vs_v1_ndcg@5": 0.014,
+      "experiment_group": "4. Contrastive Temperature (tau)",
+      "variant": "tau = 0.02 (Extreme Cold / Over-Sharpened) [NEGATIVE RESULT]",
+      "notes": "NEGATIVE RESULT: Gradient saturation on hard outliers causing embedding collapse and degraded test NDCG."
+    },
+    {
+      "system_name": "trained_contrastive_adapter",
+      "ndcg@5": {
+        "mean": 0.3292,
+        "ci_95": [
+          0.1537,
+          0.4998
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.3963,
+        "ci_95": [
+          0.2055,
+          0.5737
+        ]
+      },
+      "recall@5": {
+        "mean": 0.1799,
+        "ci_95": [
+          0.0916,
+          0.2771
+        ]
+      },
+      "mrr@10": 0.4979,
+      "p_val_vs_v1_ndcg@5": 0.008,
+      "experiment_group": "4. Contrastive Temperature (tau)",
+      "variant": "tau = 0.20 (Warm / Diffuse Penalty)",
+      "notes": "Soft penalty fails to cleanly separate borderline style discordances."
+    },
+    {
+      "system_name": "hybrid_retriever",
+      "ndcg@5": {
+        "mean": 0.6436,
+        "ci_95": [
+          0.4725,
+          0.8208
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.6635,
+        "ci_95": [
+          0.5006,
+          0.7982
+        ]
+      },
+      "recall@5": {
+        "mean": 0.322,
+        "ci_95": [
+          0.2454,
+          0.3874
+        ]
+      },
+      "mrr@10": 0.9167,
+      "p_val_vs_v1_ndcg@5": 0.372,
+      "experiment_group": "5. Hybrid Fusion Strategy",
+      "variant": "Linear Late Fusion (Dense + BM25 + Attr) [Val-Tuned]",
+      "notes": "Min-Max normalized weighted sum: {'dense': 0.4, 'bm25': 0.3, 'attr': 0.3}."
+    },
+    {
+      "system_name": "hybrid_retriever",
+      "ndcg@5": {
+        "mean": 0.6321,
+        "ci_95": [
+          0.4562,
+          0.799
+        ]
+      },
+      "ndcg@10": {
+        "mean": 0.6701,
+        "ci_95": [
+          0.5487,
+          0.7861
+        ]
+      },
+      "recall@5": {
+        "mean": 0.2972,
+        "ci_95": [
+          0.2441,
+          0.354
+        ]
+      },
+      "mrr@10": 0.8333,
+      "p_val_vs_v1_ndcg@5": 0.408,
+      "experiment_group": "5. Hybrid Fusion Strategy",
+      "variant": "Reciprocal Rank Fusion (RRF, k=60) [Val-Tuned]",
+      "notes": "Rank-based non-linear reciprocal fusion robust to score distribution shifts."
+    }
+  ]
+}

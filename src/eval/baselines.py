@@ -507,7 +507,9 @@ class SigLIPBaseline(BaseRanker):
 
             cand_key = tuple(r.rug_id for r in candidates)
             if not hasattr(self, "_cand_cache") or getattr(self, "_cand_cache_key", None) != cand_key:
-                cand_prompts = [f"{r.title}. Colors: {r.color}. Style: {r.style}. Pattern: {r.pattern}" for r in candidates]
+                cand_prompts = [
+                    f"{r.title}. Colors: {r.color}. Style: {r.style}. Pattern: {r.pattern}" for r in candidates
+                ]
                 c_inputs = self._processor(text=cand_prompts, return_tensors="pt", padding=True, truncation=True)
                 cand_features = _extract_tensor(self._model.get_text_features(**c_inputs))
                 cand_features = cand_features / cand_features.norm(dim=-1, keepdim=True)

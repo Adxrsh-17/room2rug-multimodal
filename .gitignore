@@ -16,6 +16,7 @@ venv/
 # Large model/index files — too big for GitHub
 index/*.faiss
 index/*.pkl
+models/ablation_*.pt
 
 # Scratch/debug scripts created during development
 gen_app.py

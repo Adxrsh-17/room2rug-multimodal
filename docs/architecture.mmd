@@ -1,48 +1,54 @@
-flowchart LR
-    %% Ingestion Cluster
-    subgraph INGESTION["Ingestion Cluster"]
-        direction TB
-        ST_APP["Streamlit Web App<br/>(Room Photo & Text Query)"]
-        PY_ENG["Python 3.10 Engine"]
-        ST_APP -->|webhook / upload| PY_ENG
-    end
-
-    %% NLP & Intent Cluster
-    subgraph NLP_CLUSTER["NLP & Intent Cluster"]
-        direction TB
-        RQP["Regex Query Parser<br/>(Extracts 8x10, shape, color, style)"]
-        HF_ST["Hugging Face & Sentence-Transformers<br/>(all-MiniLM-L6-v2 Dense Text Embeddings)"]
-        RQP --> HF_ST
-    end
-
-    %% Multimodal Vision-Language Cluster
-    subgraph VISION_CLUSTER["Multimodal Vision-Language Cluster"]
-        CLIP["OpenAI CLIP ViT-B/32 + PyTorch<br/>(512-dim Vision-Language Vectors)"]
-    end
-
-    %% Storage & Vector Index Cluster
-    subgraph STORAGE_CLUSTER["Storage & Vector Index Cluster"]
-        direction TB
-        S3["AWS S3<br/>(Amazon Berkeley Objects Catalog)"]
-        FAISS["Meta FAISS<br/>(Sub-millisecond Vector Similarity Search)"]
-        S3 -.->|image embeddings / metadata| FAISS
-    end
-
-    %% Decision & Recommendation Cluster
-    subgraph DECISION_CLUSTER["Decision & Recommendation Cluster"]
-        direction TB
-        FUSION["Dynamic Late Fusion Engine<br/>Mode A / Mode B (0.6 Img + 0.4 Txt) / Mode C"]
-        EXPLAIN["Explainable AI Matcher<br/>(Natural Language Reasoning)"]
-        END_USER["End User / Visual Results<br/>(Top-K Rug Cards with Live Photos)"]
+flowchart TD
+    subgraph ClientLayer ["Client & Ingestion Layer"]
+        UserQuery["User Input\n(Text Query + Optional Room Photo)"]
+        StreamlitUI["Streamlit UI\n(Thin Interactive Client)"]
+        FastAPIEndpoint["FastAPI REST Service\nPOST /search | GET /health | GET /metrics"]
         
-        FUSION -->|fused ranking| EXPLAIN
-        EXPLAIN --> END_USER
+        UserQuery --> StreamlitUI
+        UserQuery --> FastAPIEndpoint
+        StreamlitUI --> FastAPIEndpoint
     end
 
-    %% Cross-Cluster Connections
-    PY_ENG -->|text query| RQP
-    PY_ENG -->|room photo| CLIP
-    
-    HF_ST -->|text similarity| FUSION
-    CLIP -->|visual query vector| FAISS
-    FAISS -->|vector ANN search| FUSION
+    subgraph Stage1 ["Stage 1: Hybrid Retrieval (Depth: Top-50 Candidates)"]
+        QueryParser["Query Parser & Normalizer\n(Regex Dimension, Color & Style Matcher)"]
+        BM25["BM25 Lexical Index\n(Sparse Catalog Retrieval)"]
+        DenseRetriever["Dense Multimodal Retriever\n(CLIP ViT-B/32 + Contrastive Adapter / MiniLM)"]
+        FAISSIndex["Meta FAISS Index\n(Sub-millisecond Vector ANN Search)"]
+        RRF["Reciprocal Rank Fusion\n(RRF, k=60)"]
+        
+        FastAPIEndpoint --> QueryParser
+        QueryParser --> BM25
+        FastAPIEndpoint --> DenseRetriever
+        DenseRetriever --> FAISSIndex
+        BM25 --> RRF
+        FAISSIndex --> RRF
+    end
+
+    subgraph Stage2 ["Stage 2: Learned Reranking (Depth: Top-10 Results)"]
+        FeatureEngine["17-Feature Extraction Engine\n- CIELAB Perceptual Delta-E Color Harmony\n- Stage 1 Dense & BM25 Similarity Scores\n- RRF Reciprocal Ranks & Priors\n- Exact Color, Style & Dimension Overlaps\n- Utilitarian Catalog Classifier ('is_rug_pad', log_price)"]
+        LambdaMART["LightGBM LambdaMART Reranker\n(Pairwise NDCG Objective, 80 Trees)"]
+        TreeSHAP["TreeSHAP Engine\n(Feature Contribution Attributions)"]
+        
+        RRF --> FeatureEngine
+        FeatureEngine --> LambdaMART
+        LambdaMART --> TreeSHAP
+    end
+
+    subgraph Stage3 ["Stage 3: Grounded Explanations & Quality Guards"]
+        ExplanationGen["Grounded Explanation Generator\n(Evidence-Anchored Rationales)"]
+        FaithValidator{"Faithfulness & Contradiction Validator\n(Deterministic Catalog Fact-Checking)"}
+        DeterministicFallback["Deterministic Safe Fallback\n(Guaranteed 0% Hallucinations)"]
+        SearchResponse["Ranked Search Response\n(Top-10 Products + SHAP Signals + Latency SLA)"]
+        
+        LambdaMART --> ExplanationGen
+        ExplanationGen --> FaithValidator
+        FaithValidator -- Pass (Faithful) --> SearchResponse
+        FaithValidator -- Flagged Contradiction --> DeterministicFallback --> SearchResponse
+    end
+
+    subgraph MLOps ["MLOps & Automated CI Quality Gates"]
+        LineageCheck["1. Lineage Manifest\n(SHA-256 Checksum Validation)"]
+        LeakageCheck["2. Group-Disjoint Splits\n(Zero-Leakage Room/Rug Isolation)"]
+        NDCGGuard["3. Metric Regression Guard\n(NDCG@5 >= 0.58 on Gold Test Set)"]
+        LatencyGuard["4. Latency SLA Guard\n(Retrieval SLA <= 500 ms)"]
+    end

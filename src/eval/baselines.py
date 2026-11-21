@@ -268,10 +268,14 @@ class MiniLMBaseline(BaseRanker):
             # Fallback to token overlap
             return BM25Baseline().rank(query, candidates, top_k=top_k)
 
-        cand_texts = [f"{r.title}. {r.color} {r.style} {r.pattern}. {r.tags}. {r.body[:200]}" for r in candidates]
+        cand_key = tuple(r.rug_id for r in candidates)
+        if not hasattr(self, "_cand_cache") or getattr(self, "_cand_cache_key", None) != cand_key:
+            cand_texts = [f"{r.title}. {r.color} {r.style} {r.pattern}. {r.tags}. {r.body[:200]}" for r in candidates]
+            self._cand_cache = model.encode(cand_texts, normalize_embeddings=True, show_progress_bar=False)
+            self._cand_cache_key = cand_key
+        cand_embs = self._cand_cache
 
         q_emb = model.encode([q_text], normalize_embeddings=True, show_progress_bar=False)[0]
-        cand_embs = model.encode(cand_texts, normalize_embeddings=True, show_progress_bar=False)
 
         sims = np.dot(cand_embs, q_emb)
 

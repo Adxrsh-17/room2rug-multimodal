@@ -74,6 +74,9 @@ jobs:
           if [ -f quality_gate.log ]; then
             echo "### Quality Gate Summary" >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            tail -n 35 quality_gate.log >> $GITHUB_STEP_SUMMARY
+            cat quality_gate.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
+            while IFS= read -r line; do
+              echo "::warning title=QualityGateLog::$line"
+            done < quality_gate.log
           fi

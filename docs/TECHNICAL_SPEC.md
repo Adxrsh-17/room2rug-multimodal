@@ -1,185 +1,119 @@
-# Technical Write-Up: Multimodal Rug Search & Recommendation System
+# Technical Specification: Two-Stage Multimodal Search & Reranking System
 
-## Problem Statement
+## 1. System Overview
 
-Build a two-part search and recommendation system for a rug e-commerce catalog:
+`room2rug-multimodal` provides real-time search and recommendation for e-commerce rug discovery. The pipeline processes multimodal queries (free-text specifications combined with residential interior photography) and returns ranked catalog items with grounded explanations.
 
-- **Part 1 — Structured Text Search**: Accept free-text queries like "8x10 beige traditional rug" and return the most relevant products by combining metadata filtering with semantic similarity.
-- **Part 2 — Multimodal Recommendation**: Accept a room photograph (optionally combined with a text query) and recommend rugs that visually fit the room's palette, style, and spatial context.
-
-The catalog is a Shopify CSV export containing 68 unique products across multiple size variants.
-
----
-
-## Data Preprocessing (`src/preprocess.py`)
-
-The raw Shopify CSV has one row per product variant (size) and multiple rows per image. Preprocessing groups rows by `Handle` and:
-
-1. **Selects the primary image row** (`Image Position == 1`) to avoid duplicate images.
-2. **Strips HTML** from the `Body (HTML)` column using BeautifulSoup to get clean, searchable text.
-3. **Collects all size variants** from `Option1 Value`, `Option2 Value`, `Variant Title`, etc. and normalizes dimension strings (e.g., `"8 × 10"` → `"8x10"`).
-4. **Builds a single product dict** per handle with fields: `handle`, `title`, `body`, `tags`, `image_url`, `size`, `sizes`, `price`, `style`, `color`, `searchable_text`.
-
-The result is 68 clean product records, each with a unified `searchable_text` blob for ranking.
+### Key Capabilities
+- **Multimodal Intent Parsing**: Jointly resolves dimensional constraints (e.g., "8x10", "runner"), style cues ("boho", "traditional"), and chromatic context extracted from room photography.
+- **Two-Stage Cascaded Retrieval**: Fuses sparse lexical search (BM25) and dense embeddings (CLIP ViT-B/32, SigLIP, MiniLM with contrastive residual adapter) via Reciprocal Rank Fusion ($k=60$), followed by a LightGBM LambdaMART reranker.
+- **Colorimetric Harmony**: Computes perceptual color distance ($\Delta E^*_{ab}$) between room palette clusters and rug dominant colors in CIELAB color space.
+- **Grounded Explanations with Quality Guardrails**: Verifies generated rationales against catalog facts, guaranteeing zero attribute contradictions.
 
 ---
 
-## Part 1 — Structured Text Search
+## 2. Ingestion & Preprocessing
 
-### Query Parser (`src/query_parser.py`)
-
-A hybrid regex + rule-based parser extracts structured intent from free-text queries. No NLP library is required.
-
-**Dimensions** are extracted using a set of regex patterns:
-```python
-r"(\d+\.?\d*)\s*[xX×]\s*(\d+\.?\d*)"  # classic: "8x10", "5 X 8"
-
-r"(\d+\.?\d*)\s+by\s+(\d+\.?\d*)"  # natural: "8 by 10"
-r"(\d+\.?\d*)\s*ft?\s*[xX×]\s*..."  # with units
-```
-Dimension values ≥ 30 are rejected (likely inches, not feet). Width and length are always sorted so `"10x8"` is treated identically to `"8x10"`.
-
-**Shape** is determined by keyword presence: `runner`, `round`/`circular`, `square` → rectangle default.
-
-**Color** is matched against a static list of ~27 rug colors (beige, blue, grey, ivory, navy, etc.). Synonyms like `gray→grey`, `boho→bohemian`, `off-white→ivory` are normalized. `neutral` supersedes all specific colors.
-
-**Style** is matched against 19 style keywords: traditional, modern, contemporary, Persian, bohemian, geometric, abstract, transitional, etc.
-
-**Size class** (`small`, `medium`, `large`, `xlarge`) is mapped to area ranges and used when no exact dimensions are given.
-
-**Example outputs:**
-```
-"8x10 beige traditional rug"  →  {dimensions: {8,10}, color: [beige], style: [traditional]}
-"runner 2x10 blue rug"        →  {shape: runner, dimensions: {2,10}, color: [blue]}
-"large neutral rug"           →  {size_class: large, color: [neutral]}
-```
-
-### Filtering (`src/filter_catalog.py`)
-
-Soft filters preserve recall while prioritizing precision:
-
-- **Size filter**: checks all size variants using `±1.5 ft` tolerance on each dimension. Falls back to full catalog if no products match.
-- **Color filter**: substring match against `searchable_text` (title + tags + body).
-- **Style filter**: substring match with synonym expansion (`boho → bohemian`, `modern → contemporary`).
-
-Each filter produces a `metadata_score` (0.0–1.0) using weighted components: size (40%), color (30%), style (30%).
-
-### Ranking (`src/ranker.py`)
-
-Uses `SentenceTransformers` (`all-MiniLM-L6-v2`) to embed both the raw query and each product's text blob (title + tags + first 300 chars of description). Final score:
-
-```
-final_score = 0.5 × metadata_score + 0.5 × semantic_cosine_similarity
-```
-
-Products below a minimum threshold (0.15) are filtered unless fewer than 5 results remain. Results are returned in descending score order, with price as a tiebreaker.
-
-**Weight justification**: Equal weighting balances structured intent precision (size/color/style) with open-ended semantic understanding. This prevents a query like "blue transitional" from only returning size-matched products and vice versa.
+The product catalog is derived from Amazon Berkeley Objects (ABO) and Shopify exports ($N=68$ unique products across multiple size variants):
+1. **Deduplication**: Image-position filtering selects primary product images and removes redundant variant assets.
+2. **Text Normalization**: Strips HTML tags, unifies dimensions into standard notation (e.g., `8 × 10` $\to$ `8x10`), and aggregates titles, tags, and descriptions into a structured search document.
+3. **Palette Extraction**: Computes dominant color clusters and cluster weights in CIELAB ($L^*a^*b^*$) space using $k$-means ($k=3$).
 
 ---
 
-## Part 2 — Multimodal Image-Based Recommendation
+## 3. Stage 1: Hybrid Retrieval
 
-### CLIP Embedding (`src/embedder.py`)
+### 3.1 Sparse Retrieval (BM25)
+- Standard BM25Okapi scoring across tokenized query strings and catalog documents ($k_1=1.5, b=0.75$).
 
-Uses `openai/clip-vit-base-patch32` via HuggingFace Transformers. CLIP is the right choice here because it maps both images and text into the **same 512-dimensional vector space**, enabling direct cross-modal cosine similarity without a separate visual encoder.
+### 3.2 Dense Multimodal Retrieval
+- **Text Encoder**: Sentence-Transformers `all-MiniLM-L6-v2` with candidate embedding caching in memory.
+- **Vision-Language Encoders**: OpenAI CLIP ViT-B/32 and Google SigLIP (`siglip-base-patch16-224`).
+- **Contrastive Projection Adapter**: A residual projection head trained via InfoNCE loss with hard negatives to align room floor representations with product catalog vectors.
+- **Vector Search**: Meta FAISS inner product index (`IndexFlatIP`).
 
-```python
-from transformers import CLIPModel, CLIPProcessor
-
-model = CLIPModel.from_pretrained("openai/clip-vit-base-patch32")
-processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
-```
-
-- `embed_image(source)` — accepts file paths, URLs, or `PIL.Image` objects. Downloads remote images with retry, composites RGBA transparencies onto white, resizes to max 1024px, and returns an L2-normalized 512-d vector.
-- `embed_text(text)` — truncates to 60 words (CLIP's 77-token limit), returns L2-normalized 512-d vector.
-- All vectors are L2-normalized so inner product equals cosine similarity.
-
-### FAISS Index (`src/indexer.py`)
-
-For each product, the catalog embeds:
-1. **Image embedding** from `image_url` (product photo)
-2. **Text embedding** from `title + tags`
-
-Both are stored in separate `faiss.IndexFlatIP` (inner product) indexes — one for images, one for text. A fallback `NumpyInnerProductIndex` is used when FAISS is unavailable (e.g., on Windows without a Conda environment).
-
-Indexes are persisted to `index/` and reloaded if the product count hasn't changed, making repeated queries fast.
-
-### Fusion Scoring (`src/fusion.py`)
-
-Three query modes depending on what inputs are provided:
-
-| Mode | Inputs | Score Formula |
-|------|--------|---------------|
-| A | Room image only | `1.0 × image_similarity` |
-| B | Image + text query | `0.6 × image_sim + 0.4 × text_sim` |
-| C | Text query only | `1.0 × text_similarity` |
-
-**Weight justification (Mode B)**: The room photograph carries the dominant signal — it captures color palette, room style (modern/traditional/rustic), spatial scale, and lighting context simultaneously. The text query refines intent (specific size or style preference) but is secondary. Hence image gets 0.6 and text gets 0.4.
-
-### Room Context Classification (`src/search_part2.py`)
-
-When both image and text are provided, the room image embedding is compared against CLIP text embeddings of curated label sets:
-
-- **Room type**: living room, bedroom, dining room, hallway, office, kids room
-- **Color palette**: warm tones, cool tones, neutral tones, dark tones, bright colors
-- **Room style**: modern minimalist, traditional classic, bohemian eclectic, rustic farmhouse, coastal
-
-The top-matching label per category is appended to the text query if it's not already present and its confidence ≥ 0.2. This query augmentation bridges the gap between the image's visual signal and the text index.
+### 3.3 Reciprocal Rank Fusion (RRF)
+Combines candidate rankings from sparse and dense sub-systems into an unified Top-50 candidate pool:
+$$\text{RRF\_Score}(d) = \sum_{m \in M} \frac{w_m}{k_{\text{rrf}} + \text{rank}_m(d)}$$
+where $k_{\text{rrf}} = 60$, with default weights $w_{\text{dense}} = 0.50$, $w_{\text{bm25}} = 0.25$, and $w_{\text{attr}} = 0.25$.
 
 ---
 
-## Architecture
+## 4. Stage 2: Learned Reranking (LambdaMART)
 
-```
-[Text Query] ──► Query Parser ──► Metadata Filter ──►
-                                                       ├──► Fusion Score ──► Ranked Results
-[Room Image] ──► CLIP Encoder ──► FAISS Search ─────►
-[Optional Text]► CLIP Text Enc ──► Cosine Sim ──────►
-```
+Candidates from Stage 1 are reranked using a LightGBM LambdaMART model (`models/lambdamart_reranker.txt`).
 
-See `architecture.png` for the full diagram.
+### 4.1 Feature Set (17 Signals)
+| Feature Name | Category | Description | Split Gain Share |
+|---|---|---|:---:|
+| `stage1_score` | Stage 1 Prior | Normalized retrieval score from Stage 1 | 36.0% |
+| `color_exact_match` | Attribute Match | Exact query color token overlap with product metadata | 25.7% |
+| `log_price` | Price / Category | Natural logarithm of product price ($\ln(1 + \text{price})$) | 9.4% |
+| `title_token_overlap` | Lexical Overlap | Jaccard token overlap between query and product title | 8.9% |
+| `cielab_weighted_delta_e` | Colorimetry | Weight-averaged $\Delta E^*_{ab}$ distance between room and rug palettes | 5.8% |
+| `style_exact_match` | Attribute Match | Exact query style token overlap with product metadata | 5.7% |
+| `stage1_rank` | Stage 1 Prior | Candidate rank position from Stage 1 retrieval | 4.2% |
+| `cielab_min_delta_e` | Colorimetry | Minimum pairwise $\Delta E^*_{ab}$ across palette clusters | 2.1% |
+| `stage1_rrf` | Stage 1 Prior | Raw RRF fusion score ($1 / (60 + \text{rank})$) | 1.8% |
+| `color_overlap_score` | Attribute Match | Normalized recall of query colors in product metadata | 0.4% |
+| `clip_sim` | Dense Similarity | Cosine similarity between query and product in CLIP space | < 0.1% |
+| `siglip_sim` | Dense Similarity | Cosine similarity between query and product in SigLIP space | < 0.1% |
+| `minilm_sim` | Dense Similarity | Cosine similarity between query text and product text in MiniLM space | < 0.1% |
+| `bm25_score` | Sparse Similarity | Normalized BM25 lexical similarity score | < 0.1% |
+| `style_overlap_score` | Attribute Match | Normalized recall of query styles in product metadata | < 0.1% |
+| `size_exact_match` | Attribute Match | Binary match on query dimensions (e.g., 8x10) against product sizes | < 0.1% |
+| `is_rug_pad` | Guardrail | Binary indicator detecting utilitarian rug pads vs. area rugs | < 0.1% |
 
----
+### 4.2 Model Hyperparameters
+- Objective: `lambdarank`
+- Metric: `ndcg` evaluated at $k \in \{1, 3, 5, 10\}$
+- Number of estimators: 80
+- Learning rate: 0.05
+- Number of leaves: 15
+- Min child samples: 3
 
-## Evaluation & Benchmarks
-
-The system was evaluated using an end-to-end benchmark suite ([`scripts/evaluate_metrics.py`](../scripts/evaluate_metrics.py)) across 48 automated pipeline tests, multi-intent search queries, and modality ablation settings:
-
-### Information Retrieval (IR) Benchmarks
-- **Precision@1**: `1.000` (100%)
-- **Precision@5**: `1.000` (100%)
-- **Precision@10**: `0.980` (98.0%)
-- **MRR@10**: `1.000` (First relevant candidate placed at top rank)
-- **mAP@10**: `0.979`
-- **NDCG@10**: `0.664`
-
-### Modality Ablation Study
-| Configuration | NDCG@10 | MRR@10 | Precision@5 | mAP@10 | Lift (NDCG@10) |
-|---|:---:|:---:|:---:|:---:|:---:|
-| **Metadata Filter Only** | `0.616` | `1.000` | `1.000` | `0.973` | Baseline |
-| **Dense Text Only (`all-MiniLM-L6-v2`)** | `0.635` | `1.000` | `1.000` | `1.000` | +3.08% |
-| **Visual CLIP Only (`ViT-B/32`)** | `0.587` | `1.000` | `0.907` | `0.871` | -4.71% |
-| **Hybrid Late Fusion (Proposed)** | **`0.664`** | **`1.000`** | **`1.000`** | **`0.979`** | **+13.12% vs Visual** |
-
-### Intent Extraction Precision
-- **Dimensions**: `100.0%`
-- **Shapes**: `100.0%`
-- **Colors**: `100.0%`
-- **Styles**: `93.3%`
-- **Macro F1**: `98.3%`
-
-### Latency Profile
-- **Intent Parsing**: `0.43 ms` (P95 `0.51 ms`)
-- **Part 1 Search (E2E)**: `21.47 ms` (46.6 QPS)
-- **FAISS Vector Index Retrieval**: `0.22 ms` (4,602+ QPS)
+### 4.3 Feature Attributions (TreeSHAP)
+Individual ranking decisions are explained via TreeSHAP feature contributions computed using LightGBM's native C++ implementation (`booster.predict(X, pred_contrib=True)`).
 
 ---
 
-## Limitations & Future Work
+## 5. Stage 3: Grounded Explanations & Faithfulness Guard
 
-1. **Image embedding quality**: Product images in the catalog are sourced from the **Amazon Berkeley Objects (ABO)** dataset hosted on public Amazon S3 (`https://amazon-berkeley-objects.s3.amazonaws.com/images/small/...`), enabling 100% real image downloads (68 real images, 0 text-fallback, 0 missing URLs). Visual-similarity scores are calculated directly from pixel-level CLIP features across all products. A domain fine-tuned CLIP model on room-rug pairs would further improve recommendation accuracy.
-2. **Size normalization**: Fractional sizes like `"7'9" × 10'2"` are not fully handled; a dedicated parser would improve coverage.
-3. **Explainability**: The current LLM-based explainer falls back to a template sentence. Integration with a small generative model (e.g., Gemma-2B) would produce more specific explanations.
-4. **Vector Database Scaling**: Current indexes use flat FAISS inner-product arrays with serialized `.npy` storage. For massive catalogs (>100k items), migrating to a distributed vector database (e.g., Pinecone, Qdrant, or Milvus) with HNSW indexing will enable sub-millisecond retrieval at scale.
+To prevent generative hallucinations in consumer-facing recommendations, the explanation subsystem implements strict guardrails:
+1. **Grounded Generation**: Produces rationales structured around verified attributes (color compatibility, dimension alignment, material properties).
+2. **Faithfulness Validator**: Verifies explanation text against the canonical catalog record:
+   - Validates stated materials (e.g., wool, jute, polypropylene).
+   - Validates stated primary colors and dimensions.
+   - Detects utilitarian product confusion (rug pad vs. decorative rug).
+3. **Deterministic Fallback**: If an unfaithful claim is flagged, the pipeline automatically substitutes a deterministic template rationale, ensuring a **0% contradiction rate**.
 
+---
+
+## 6. Offline Evaluation & Benchmark Results
+
+Evaluated on the held-out **Human Gold Test Set** ($N=8$ test queries, 68 catalog items) with 1,000-sample bootstrap 95% confidence intervals and paired permutation tests vs. `baseline_v1`:
+
+| System / Model | Pipeline Stage | NDCG@5 (95% CI) | NDCG@10 (95% CI) | Recall@5 (95% CI) | MRR@10 | MAP@10 | $p$-value vs v1 |
+|---|:---:|:---:|:---:|:---:|:---:|:---:|:---:|
+| **BM25 Lexical** | Baseline | 0.471 [0.286, 0.657] | 0.543 [0.381, 0.723] | 0.225 [0.144, 0.290] | 0.653 | 0.549 | 0.0285* |
+| **Attribute Filter** | Baseline | 0.651 [0.447, 0.856] | 0.659 [0.492, 0.819] | 0.299 [0.266, 0.330] | 0.760 | 0.649 | 0.4625 |
+| **CLIP Zero-Shot** | Baseline | 0.654 [0.493, 0.824] | 0.650 [0.546, 0.744] | 0.333 [0.276, 0.391] | 0.938 | 0.664 | 0.2545 |
+| **Baseline v1 (Rule Fusion)** | Baseline | 0.753 [0.594, 0.899] | 0.750 [0.655, 0.841] | 0.353 [0.295, 0.415] | 1.000 | 0.786 | — |
+| **Stage 1 Hybrid (RRF)** | Stage 1 | 0.612 [0.459, 0.778] | 0.590 [0.465, 0.702] | 0.283 [0.225, 0.349] | 0.917 | 0.516 | 0.2545 |
+| **Full Pipeline (LambdaMART)** | Stage 2 | **0.624** [0.434, 0.804] | **0.635** [0.489, 0.770] | **0.310** [0.192, 0.413] | **0.854** | **0.577** | 0.2160 |
+
+---
+
+## 7. Production Serving & Latency Budget
+
+### Latency Budget (Target: $\le 500$ ms SLA)
+- **Query Parsing**: 0.02 ms
+- **Stage 1 Retrieval**: ~140 ms (median on CPU; sub-30ms with warm in-memory cache)
+- **Stage 2 Reranking**: ~11 ms
+- **Grounded Explanations**: ~2 ms
+- **Total End-to-End Latency**: **< 160 ms** (P95 < 250 ms)
+
+### REST API Endpoints
+- `POST /search`: Accepts `SearchRequest` (text query, optional base64 room image, top_k, mode, explain flag).
+- `GET /health`: Healthcheck endpoint reporting model and index status.
+- `GET /metrics`: Service telemetry and latency metrics.

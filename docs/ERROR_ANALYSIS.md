@@ -6,23 +6,23 @@ This document provides a systematic diagnostic breakdown of the two-stage **Stag
 
 | Feature Name | Gain Share | Description |
 |---|:---:|---|
-| `stage1_score` | **36.0%** | Ranking feature |
-| `color_exact_match` | **25.7%** | Ranking feature |
-| `log_price` | **9.4%** | Ranking feature |
-| `title_token_overlap` | **8.9%** | Ranking feature |
-| `cielab_weighted_delta_e` | **5.8%** | Ranking feature |
-| `style_exact_match` | **5.7%** | Ranking feature |
-| `stage1_rank` | **4.2%** | Ranking feature |
-| `cielab_min_delta_e` | **2.1%** | Ranking feature |
-| `stage1_rrf` | **1.8%** | Ranking feature |
-| `color_overlap_score` | **0.4%** | Ranking feature |
-| `clip_sim` | **0.0%** | Ranking feature |
-| `siglip_sim` | **0.0%** | Ranking feature |
-| `minilm_sim` | **0.0%** | Ranking feature |
-| `bm25_score` | **0.0%** | Ranking feature |
-| `style_overlap_score` | **0.0%** | Ranking feature |
-| `size_exact_match` | **0.0%** | Ranking feature |
-| `is_rug_pad` | **0.0%** | Ranking feature |
+| `stage1_score` | **36.0%** | Normalized reciprocal fusion score from Stage 1 candidate retrieval |
+| `color_exact_match` | **25.7%** | Binary match indicator between extracted query color tokens and rug catalog metadata |
+| `log_price` | **9.4%** | Log-transformed retail price ($\ln(1 + \text{price})$), separating premium rugs from utilitarian items |
+| `title_token_overlap` | **8.9%** | Normalized lexical Jaccard overlap between query content tokens and product title tokens |
+| `cielab_weighted_delta_e` | **5.8%** | Cluster-size weighted Euclidean $\Delta E^*_{ab}$ distance between room and rug CIELAB palettes |
+| `style_exact_match` | **5.7%** | Binary indicator verifying presence of requested style keywords (vintage, modern, boho, etc.) |
+| `stage1_rank` | **4.2%** | Ordinal candidate rank output from Stage 1 hybrid retrieval pool |
+| `cielab_min_delta_e` | **2.1%** | Minimum pairwise Euclidean $\Delta E^*_{ab}$ distance between closest room and rug palette centers |
+| `stage1_rrf` | **1.8%** | Reciprocal Rank Fusion prior ($1 / (60 + \text{rank})$) from dense and sparse retrieval |
+| `color_overlap_score` | **0.4%** | Fractional recall of query color tokens present in candidate metadata |
+| `clip_sim` | **0.0%** | Zero-shot CLIP ViT-B/32 cosine similarity between multimodal query and rug prompt |
+| `siglip_sim` | **0.0%** | SigLIP base patch16 cosine similarity between query and candidate text representations |
+| `minilm_sim` | **0.0%** | MiniLM dense sentence embedding cosine similarity on catalog text |
+| `bm25_score` | **0.0%** | Raw Okapi BM25 sparse lexical matching score |
+| `style_overlap_score` | **0.0%** | Fractional recall of query style tokens found in candidate tags |
+| `size_exact_match` | **0.0%** | Binary dimension compatibility indicator matching regex dimensions (e.g., 8x10, 5x7) |
+| `is_rug_pad` | **0.0%** | Binary indicator flagging protective underlays and non-decorative floor pads |
 
 ## 2. Feature Group Ablation Study
 

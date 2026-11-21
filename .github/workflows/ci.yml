@@ -15,6 +15,9 @@ jobs:
 
     env:
       PYTHONPATH: .
+      CI: "true"
+      HF_HUB_DISABLE_SYMLINKS_WARNING: "1"
+      TOKENIZERS_PARALLELISM: "false"
 
     steps:
       - name: Checkout Repository
@@ -76,7 +79,9 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             cat quality_gate.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            while IFS= read -r line; do
-              echo "::warning title=QualityGateLog::$line"
-            done < quality_gate.log
+            if grep -q "GATE FAILED\|CI GATE FAILURE\|Traceback" quality_gate.log; then
+              tail -n 15 quality_gate.log | while IFS= read -r line; do
+                echo "::error title=QualityGate::$line"
+              done
+            fi
           fi

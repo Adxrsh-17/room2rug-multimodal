@@ -17,11 +17,17 @@ import pandas as pd
 
 from scripts.check_lineage import verify_lineage
 from src.data.splits import create_group_splits, verify_no_leakage
+from src.eval.baselines import _FAILED_MODELS
 from src.eval.benchmark_data import load_test_data
 from src.eval.metrics import evaluate_rankings
 from src.rerank.lambdamart import LambdaMARTRanker
 from src.service.pipeline import ProductionSearchPipeline
 from src.service.schemas import SearchRequest
+
+# Guard against multi-gigabyte unauthenticated vision model downloads in CI/CD runners
+if os.environ.get("CI") == "true" or os.environ.get("GITHUB_ACTIONS") == "true":
+    _FAILED_MODELS.add("openai/clip-vit-base-patch32")
+    _FAILED_MODELS.add("google/siglip-base-patch16-224")
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("CIQualityGate")

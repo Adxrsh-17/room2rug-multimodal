@@ -16,6 +16,7 @@ jobs:
     env:
       PYTHONPATH: .
       CI: "true"
+      PYTHONUNBUFFERED: "1"
       HF_HUB_DISABLE_SYMLINKS_WARNING: "1"
       TOKENIZERS_PARALLELISM: "false"
 
@@ -69,7 +70,7 @@ jobs:
       - name: Automated Quality Gate (Lineage, Regression & Latency)
         run: |
           set -o pipefail
-          python scripts/ci_quality_gate.py 2>&1 | tee quality_gate.log
+          python -u scripts/ci_quality_gate.py 2>&1 | tee quality_gate.log
 
       - name: Quality Gate Step Summary
         if: always()
@@ -79,9 +80,8 @@ jobs:
             echo '```' >> $GITHUB_STEP_SUMMARY
             cat quality_gate.log >> $GITHUB_STEP_SUMMARY
             echo '```' >> $GITHUB_STEP_SUMMARY
-            if grep -q "GATE FAILED\|CI GATE FAILURE\|Traceback" quality_gate.log; then
-              tail -n 15 quality_gate.log | while IFS= read -r line; do
-                echo "::error title=QualityGate::$line"
-              done
+            if [ "${{ job.status }}" != "success" ]; then
+              ERR_MSG=$(tail -n 12 quality_gate.log | tr '\n' ' ')
+              echo "::error title=QualityGate::$ERR_MSG"
             fi
           fi

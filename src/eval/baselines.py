@@ -22,6 +22,10 @@ from src.eval.base import BaseRanker, CandidateRug, Query, RankResult
 
 logger = logging.getLogger(__name__)
 
+# Process-level singleton caches to prevent redundant model instantiation & downloading
+_SHARED_MODELS: dict[str, Any] = {}
+_FAILED_MODELS: set[str] = set()
+
 
 def _extract_tensor(features: Any) -> Any:
     if hasattr(features, "pooler_output") and features.pooler_output is not None:
@@ -228,18 +232,28 @@ class MiniLMBaseline(BaseRanker):
 
     def __init__(self, model_name: str = "all-MiniLM-L6-v2") -> None:
         self.model_name = model_name
-        self._model = None
+        self._model = _SHARED_MODELS.get(model_name)
 
     def _get_model(self):
-        if self._model is None:
-            try:
-                from sentence_transformers import SentenceTransformer
+        if self._model is not None:
+            return self._model
+        if self.model_name in _SHARED_MODELS:
+            self._model = _SHARED_MODELS[self.model_name]
+            return self._model
+        if self.model_name in _FAILED_MODELS:
+            return None
+        try:
+            from sentence_transformers import SentenceTransformer
 
-                self._model = SentenceTransformer(self.model_name)
-            except Exception as e:
-                logger.warning(f"Could not load SentenceTransformer: {e}")
-                self._model = None
-        return self._model
+            model = SentenceTransformer(self.model_name)
+            _SHARED_MODELS[self.model_name] = model
+            self._model = model
+            return model
+        except Exception as e:
+            logger.warning(f"Could not load SentenceTransformer '{self.model_name}': {e}")
+            _FAILED_MODELS.add(self.model_name)
+            self._model = None
+            return None
 
     def rank(
         self,
@@ -292,21 +306,35 @@ class CLIPBaseline(BaseRanker):
 
     def __init__(self, model_name: str = "openai/clip-vit-base-patch32") -> None:
         self.model_name = model_name
-        self._model = None
-        self._processor = None
+        cached = _SHARED_MODELS.get(model_name)
+        if cached is not None:
+            self._model, self._processor = cached
+        else:
+            self._model = None
+            self._processor = None
+        self._fallback_minilm: MiniLMBaseline | None = None
 
     def _load_model(self):
-        if self._model is None:
-            try:
-                from transformers import CLIPModel, CLIPProcessor
+        if self._model is not None and self._processor is not None:
+            return
+        if self.model_name in _SHARED_MODELS:
+            self._model, self._processor = _SHARED_MODELS[self.model_name]
+            return
+        if self.model_name in _FAILED_MODELS:
+            self._model, self._processor = None, None
+            return
+        try:
+            from transformers import CLIPModel, CLIPProcessor
 
-                self._processor = CLIPProcessor.from_pretrained(self.model_name)
-                self._model = CLIPModel.from_pretrained(self.model_name)
-                self._model.eval()
-            except Exception as e:
-                logger.warning(f"Could not load CLIP model: {e}")
-                self._model = None
-                self._processor = None
+            self._processor = CLIPProcessor.from_pretrained(self.model_name)
+            self._model = CLIPModel.from_pretrained(self.model_name)
+            self._model.eval()
+            _SHARED_MODELS[self.model_name] = (self._model, self._processor)
+        except Exception as e:
+            logger.warning(f"Could not load CLIP model '{self.model_name}': {e}")
+            _FAILED_MODELS.add(self.model_name)
+            self._model = None
+            self._processor = None
 
     def rank(
         self,
@@ -317,7 +345,9 @@ class CLIPBaseline(BaseRanker):
         self._load_model()
         if self._model is None or self._processor is None:
             # Fallback to MiniLM
-            return MiniLMBaseline().rank(query, candidates, top_k=top_k)
+            if self._fallback_minilm is None:
+                self._fallback_minilm = MiniLMBaseline()
+            return self._fallback_minilm.rank(query, candidates, top_k=top_k)
 
         import torch
 
@@ -452,21 +482,35 @@ class SigLIPBaseline(BaseRanker):
 
     def __init__(self, model_name: str = "google/siglip-base-patch16-224") -> None:
         self.model_name = model_name
-        self._model = None
-        self._processor = None
+        cached = _SHARED_MODELS.get(model_name)
+        if cached is not None:
+            self._model, self._processor = cached
+        else:
+            self._model = None
+            self._processor = None
+        self._fallback_clip: CLIPBaseline | None = None
 
     def _load_model(self):
-        if self._model is None:
-            try:
-                from transformers import AutoModel, AutoProcessor
+        if self._model is not None and self._processor is not None:
+            return
+        if self.model_name in _SHARED_MODELS:
+            self._model, self._processor = _SHARED_MODELS[self.model_name]
+            return
+        if self.model_name in _FAILED_MODELS:
+            self._model, self._processor = None, None
+            return
+        try:
+            from transformers import AutoModel, AutoProcessor
 
-                self._processor = AutoProcessor.from_pretrained(self.model_name)
-                self._model = AutoModel.from_pretrained(self.model_name)
-                self._model.eval()
-            except Exception as e:
-                logger.warning(f"Could not load SigLIP model: {e}")
-                self._model = None
-                self._processor = None
+            self._processor = AutoProcessor.from_pretrained(self.model_name)
+            self._model = AutoModel.from_pretrained(self.model_name)
+            self._model.eval()
+            _SHARED_MODELS[self.model_name] = (self._model, self._processor)
+        except Exception as e:
+            logger.warning(f"Could not load SigLIP model '{self.model_name}': {e}")
+            _FAILED_MODELS.add(self.model_name)
+            self._model = None
+            self._processor = None
 
     def rank(
         self,
@@ -477,7 +521,9 @@ class SigLIPBaseline(BaseRanker):
         self._load_model()
         if self._model is None or self._processor is None:
             # Fallback to CLIP if SigLIP weights cannot be downloaded
-            return CLIPBaseline().rank(query, candidates, top_k=top_k)
+            if self._fallback_clip is None:
+                self._fallback_clip = CLIPBaseline()
+            return self._fallback_clip.rank(query, candidates, top_k=top_k)
 
         import torch
 

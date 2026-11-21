@@ -26,6 +26,14 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: "pip"
 
+      - name: Cache Hugging Face Hub
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/huggingface
+          key: ${{ runner.os }}-hf-${{ hashFiles('scripts/ci_quality_gate.py') }}
+          restore-keys: |
+            ${{ runner.os }}-hf-
+
       - name: Install Dependencies
         run: |
           python -m pip install --upgrade pip

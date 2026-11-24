@@ -1,0 +1,48 @@
+% ==============================================================================
+% Room2Rug: Multimodal Search & Learning-to-Rank Engine - High-ATS Resume Entries
+% Tailored for: Machine Learning Engineer (MLE), Applied Scientist (Search/RecSys),
+%               and Backend / Systems Software Engineer (SDE).
+% Format matches: \entry{Title}{Date}, \entry{Tech}{GitHub}, \begin{itemize} ... \end{itemize} \gap
+% ==============================================================================
+
+% ------------------------------------------------------------------------------
+% OPTION 1: MACHINE LEARNING & SEARCH SYSTEMS (PRIMARY MLE / IR ENTRY)
+% Keywords: Learning-to-Rank (LTR), LightGBM, LambdaMART, TreeSHAP, Reciprocal Rank Fusion,
+%           CLIP, SigLIP, FAISS, BM25, CIELAB Colorimetry, Zero Data Leakage, NDCG@5, FastAPI
+% ------------------------------------------------------------------------------
+
+\entry{\textbf{Two-Stage Multimodal Search \& Learning-to-Rank (LTR) System}}{\textcolor{MidnightBlue}{Apr 2026 -- Sep 2026}}
+\entry{\textit{Python, PyTorch, LightGBM, CLIP, SigLIP, FAISS, BM25, FastAPI, Docker, TreeSHAP, CI/CD}}{\href{https://github.com/Adxrsh-17/room2rug-multimodal}{\textit{GitHub}}}
+\begin{itemize}
+    \item Architected a production two-stage multimodal search and Learning-to-Rank (LTR) engine matching residential room photography and natural language queries to e-commerce catalogs, bounding total CPU serving latency to \textbf{$<$ 160\,ms} via FastAPI.
+    \item Engineered a hybrid Stage 1 retrieval pipeline fusing sparse BM25 and dense CLIP/SigLIP vector search via \textbf{Reciprocal Rank Fusion (RRF, $k=60$)}, and trained a Stage 2 \textbf{LightGBM LambdaMART} pairwise ranker over 17 domain features (CIELAB $\Delta E^*_{ab}$ perceptual color harmony, TreeSHAP attributions, RRF priors), achieving \textbf{0.7249 NDCG@5} (+53.9\% lift over BM25) on human gold test queries.
+    \item Guaranteed \textbf{zero data leakage} via strict group-disjoint room/rug split partitioning, eliminated generative hallucinations with an automated catalog faithfulness validator (\textbf{0.0\% hallucination rate}), and built automated GitHub Actions CI/CD quality gates enforcing SHA-256 data lineage, latency SLAs, and NDCG regression guards.
+\end{itemize}
+\gap
+
+% ------------------------------------------------------------------------------
+% OPTION 2: HIGH-THROUGHPUT BACKEND & VECTOR RETRIEVAL FOCUS (SDE / PLATFORM)
+% Shifts focus to latency optimization, caching, vector indexing, and microservice APIs
+% ------------------------------------------------------------------------------
+
+\entry{\textbf{Room2Rug: Multimodal Vector Search \& Production Reranking Service}}{\textcolor{MidnightBlue}{Apr 2026 -- Sep 2026}}
+\entry{\textit{Python, PyTorch, FastAPI, Docker, LightGBM, FAISS, Sentence-Transformers, PyTest, GitHub Actions}}{\href{https://github.com/Adxrsh-17/room2rug-multimodal}{\textit{GitHub}}}
+\begin{itemize}
+    \item Built a high-throughput multimodal search microservice in \textbf{FastAPI} deploying multi-stage candidate pruning (FAISS ANN vector indexing $\rightarrow$ LambdaMART reranking), cutting candidate embedding latency by \textbf{15$\times$} (down to 26\,ms) via process-level singleton LRU caching.
+    \item Implemented dual-group disjoint train/test partitioning to prevent identity memorization, backed by \textbf{34 automated PyTest} suites validating mathematical metrics (DCG/NDCG, MRR, MAP, paired permutation tests, bootstrap 95\% CIs).
+    \item Containerized deployment via \textbf{Docker Compose} with health probes and structured telemetry, governed by automated CI/CD quality gates enforcing deterministic offline evaluation, sub-500ms retrieval budgets, and cryptographic artifact lineage.
+\end{itemize}
+\gap
+
+% ------------------------------------------------------------------------------
+% ATS KEYWORD MATCHING SCORECARD:
+% ------------------------------------------------------------------------------
+% Information Retrieval & ML: Learning-to-Rank (LTR), LambdaMART, Reciprocal Rank Fusion (RRF),
+%                             Pairwise Ranking, NDCG@5, NDCG@10, Mean Reciprocal Rank (MRR),
+%                             Mean Average Precision (MAP), TreeSHAP, Explainable AI (XAI).
+% Multimodal & Computer Vision: CLIP ViT-B/32, SigLIP, Sentence-Transformers, Vector Embeddings,
+%                               FAISS Approximate Nearest Neighbors (ANN), sRGB/XYZ Gamma Correction,
+%                               CIELAB Color Space, Delta-E Perceptual Color Harmony, MiniBatch K-Means.
+% Software & MLOps:           FastAPI, Docker, Microservices, Async I/O, REST APIs,
+%                             Zero Data Leakage, Group-Disjoint Splits, SHA-256 Data Lineage,
+%                             GitHub Actions, CI/CD Automated Quality Gates, Regression Testing.

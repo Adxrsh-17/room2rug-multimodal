@@ -110,43 +110,43 @@ Real-world e-commerce discovery cannot rely purely on heavy transformer rerankin
 \vspace{1em}
 \begin{center}
 \begin{tikzpicture}[
-    node distance=1.1cm and 1.5cm,
-    block/.style={rectangle, draw=SlateDark, fill=BoxBg, rounded corners=2mm, text centered, minimum height=1.0cm, minimum width=3.8cm, font=\small},
-    accentblock/.style={rectangle, draw=AccentBlue, fill=AccentBlue!10, rounded corners=2mm, text centered, minimum height=1.0cm, minimum width=3.8cm, font=\small\bfseries},
-    guardblock/.style={rectangle, draw=EmeraldGreen, fill=EmeraldGreen!10, rounded corners=2mm, text centered, minimum height=1.0cm, minimum width=3.8cm, font=\small\bfseries},
-    line/.style={draw=SlateDark, -{Latex[length=2.5mm]}, thick}
+    block/.style={rectangle, draw=SlateDark, fill=BoxBg, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.0cm, font=\small},
+    accentblock/.style={rectangle, draw=AccentBlue, fill=AccentBlue!10, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
+    guardblock/.style={rectangle, draw=EmeraldGreen, fill=EmeraldGreen!10, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
+    mlopsblock/.style={rectangle, draw=AmberWarning, fill=AmberWarning!10, dashed, rounded corners=2mm, align=left, text width=4.2cm, font=\scriptsize},
+    line/.style={draw=SlateDark, ->, >=stealth, thick}
 ]
 
     % Ingestion & Client
-    \node [block] (input) {User Query + Room Photo\\(\texttt{POST /search})};
+    \node [block] (input) at (0, 0) {User Query + Room Photo\\(\texttt{POST /search})};
     
     % Stage 1
-    \node [accentblock, below of=input, yshift=-0.4cm] (stage1) {\textbf{Stage 1: Hybrid Retrieval}\\BM25 Sparse + FAISS Dense\\$\downarrow$ RRF ($k=60$) Fusion};
+    \node [accentblock] (stage1) at (0, -1.8) {\textbf{Stage 1: Hybrid Retrieval}\\BM25 Sparse + FAISS Dense\\$\downarrow$ RRF ($k=60$) Fusion};
     
     % Stage 2
-    \node [accentblock, below of=stage1, yshift=-0.5cm] (stage2) {\textbf{Stage 2: Learned Reranking}\\17-Feature Extraction Engine\\$\downarrow$ LightGBM LambdaMART};
+    \node [accentblock] (stage2) at (0, -3.7) {\textbf{Stage 2: Learned Reranking}\\17-Feature Extraction Engine\\$\downarrow$ LightGBM LambdaMART};
     
     % Stage 3
-    \node [guardblock, below of=stage2, yshift=-0.5cm] (stage3) {\textbf{Stage 3: Grounded Rationales}\\TreeSHAP + Faithfulness Validator\\$\downarrow$ $0\%$ Hallucination Fallback};
+    \node [guardblock] (stage3) at (0, -5.6) {\textbf{Stage 3: Grounded Rationales}\\TreeSHAP + Faithfulness Validator\\$\downarrow$ $0\%$ Hallucination Fallback};
     
     % Output
-    \node [block, below of=stage3, yshift=-0.4cm] (output) {FastAPI Response\\Top-10 Products + Provenance\\($< 160\,\text{ms}$ Total Latency)};
+    \node [block] (output) at (0, -7.5) {FastAPI Response Payload\\Top-10 Products + Provenance\\($< 160\,\text{ms}$ Total Latency)};
 
     % Connections
-    \path [line] (input) -- node[right, font=\scriptsize]{Depth: Catalog ($N=68$)} (stage1);
-    \path [line] (stage1) -- node[right, font=\scriptsize]{Pruned Depth: Top-30 Pool} (stage2);
-    \path [line] (stage2) -- node[right, font=\scriptsize]{Ranked Depth: Top-10 Results} (stage3);
-    \path [line] (stage3) -- node[right, font=\scriptsize]{JSON Payload} (output);
+    \draw [line] (input) -- node[right, font=\scriptsize]{Depth: Catalog ($N=68$)} (stage1);
+    \draw [line] (stage1) -- node[right, font=\scriptsize]{Pruned Depth: Top-30 Pool} (stage2);
+    \draw [line] (stage2) -- node[right, font=\scriptsize]{Ranked Depth: Top-10 Results} (stage3);
+    \draw [line] (stage3) -- node[right, font=\scriptsize]{JSON Payload} (output);
 
     % Lateral MLOps Gate
-    \node [rectangle, draw=AmberWarning, fill=AmberWarning!10, dashed, right of=stage2, xshift=4.2cm, minimum width=3.2cm, font=\scriptsize, align=left] (mlops) {
-        \textbf{CI Quality Gates (4-Tier):}\\
+    \node [mlopsblock] (mlops) at (5.6, -3.7) {
+        \textbf{CI Quality Gates (4-Tier):}\\[2pt]
         1. Lineage SHA-256 Check\\
         2. Zero-Leakage Group Split\\
         3. NDCG@5 $\ge 0.58$ Guard\\
         4. Latency $\le 500\,\text{ms}$ Budget
     };
-    \path [draw=AmberWarning, dashed, -{Latex[length=2mm]}] (mlops) -- (stage2);
+    \draw [draw=AmberWarning, dashed, ->, >=stealth, thick] (mlops) -- (stage2);
 
 \end{tikzpicture}
 \end{center}
@@ -281,7 +281,7 @@ Table~\ref{tab:feature_catalog} lists all 17 features engineered for the LambdaM
 \texttt{bm25\_score} & Sparse Lexical & Raw Okapi BM25 score against catalog metadata & \textbf{0.0\%} & 100.0\% \\
 \texttt{style\_overlap\_score} & Metadata & Fractional recall of query style tokens found in candidate tags & \textbf{0.0\%} & 100.0\% \\
 \texttt{size\_exact\_match} & Dimension & Regex dimension compatibility (e.g., $8\times 10, 5\times 7, 2\times 3$) & \textbf{0.0\%} & 100.0\% \\
-\texttt{is_rug_pad} & Catalog Hygiene & Binary discriminator: $1.0$ if title/tags contain ``pad'', else $0.0$ & \textbf{0.0\%} & 100.0\% \\
+\texttt{is\_rug\_pad} & Catalog Hygiene & Binary discriminator: $1.0$ if title/tags contain ``pad'', else $0.0$ & \textbf{0.0\%} & 100.0\% \\
 \bottomrule
 \end{tabularx}
 \end{table}

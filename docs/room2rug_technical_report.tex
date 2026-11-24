@@ -110,27 +110,28 @@ Real-world e-commerce discovery cannot rely purely on heavy transformer rerankin
 \vspace{1em}
 \begin{center}
 \begin{tikzpicture}[
-    block/.style={rectangle, draw=SlateDark, fill=BoxBg, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.0cm, font=\small},
-    accentblock/.style={rectangle, draw=AccentBlue, fill=AccentBlue!10, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
-    guardblock/.style={rectangle, draw=EmeraldGreen, fill=EmeraldGreen!10, rounded corners=2mm, align=center, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
+    every node/.style={align=center},
+    block/.style={rectangle, draw=SlateDark, fill=BoxBg, rounded corners=2mm, text width=5.6cm, minimum height=1.0cm, font=\small},
+    accentblock/.style={rectangle, draw=AccentBlue, fill=AccentBlue!10, rounded corners=2mm, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
+    guardblock/.style={rectangle, draw=EmeraldGreen, fill=EmeraldGreen!10, rounded corners=2mm, text width=5.6cm, minimum height=1.1cm, font=\small\bfseries},
     mlopsblock/.style={rectangle, draw=AmberWarning, fill=AmberWarning!10, dashed, rounded corners=2mm, align=left, text width=4.2cm, font=\scriptsize},
     line/.style={draw=SlateDark, ->, >=stealth, thick}
 ]
 
     % Ingestion & Client
-    \node [block] (input) at (0, 0) {User Query + Room Photo\\(\texttt{POST /search})};
+    \node [block] (input) at (0, 0) {User Query + Room Photo \\ \texttt{(POST /search)}};
     
     % Stage 1
-    \node [accentblock] (stage1) at (0, -1.8) {\textbf{Stage 1: Hybrid Retrieval}\\BM25 Sparse + FAISS Dense\\$\downarrow$ RRF ($k=60$) Fusion};
+    \node [accentblock] (stage1) at (0, -1.8) {\textbf{Stage 1: Hybrid Retrieval} \\ BM25 Sparse + FAISS Dense \\ $\downarrow$ RRF ($k=60$) Fusion};
     
     % Stage 2
-    \node [accentblock] (stage2) at (0, -3.7) {\textbf{Stage 2: Learned Reranking}\\17-Feature Extraction Engine\\$\downarrow$ LightGBM LambdaMART};
+    \node [accentblock] (stage2) at (0, -3.7) {\textbf{Stage 2: Learned Reranking} \\ 17-Feature Extraction Engine \\ $\downarrow$ LightGBM LambdaMART};
     
     % Stage 3
-    \node [guardblock] (stage3) at (0, -5.6) {\textbf{Stage 3: Grounded Rationales}\\TreeSHAP + Faithfulness Validator\\$\downarrow$ $0\%$ Hallucination Fallback};
+    \node [guardblock] (stage3) at (0, -5.6) {\textbf{Stage 3: Grounded Rationales} \\ TreeSHAP + Faithfulness Validator \\ $\downarrow$ $0\%$ Hallucination Fallback};
     
     % Output
-    \node [block] (output) at (0, -7.5) {FastAPI Response Payload\\Top-10 Products + Provenance\\($< 160\,\text{ms}$ Total Latency)};
+    \node [block] (output) at (0, -7.5) {FastAPI Response Payload \\ Top-10 Products + Provenance \\ ($< 160\,\text{ms}$ Total Latency)};
 
     % Connections
     \draw [line] (input) -- node[right, font=\scriptsize]{Depth: Catalog ($N=68$)} (stage1);
